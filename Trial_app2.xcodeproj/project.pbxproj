@@ -32,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE1297AF1A2631E9006E5046 /* Model2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model2.xcdatamodel; sourceTree = "<group>"; };
 		CE539E101A23016600D1FAEB /* Trial_app2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trial_app2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE539E141A23016600D1FAEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE539E151A23016600D1FAEB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -440,6 +441,7 @@
 				CE539E351A23016700D1FAEB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CE539E361A23016700D1FAEB /* Build configuration list for PBXNativeTarget "Trial_app2Tests" */ = {
 			isa = XCConfigurationList;
@@ -448,6 +450,7 @@
 				CE539E381A23016700D1FAEB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
@@ -455,9 +458,10 @@
 		CE539E421A2465A000D1FAEB /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				CE1297AF1A2631E9006E5046 /* Model2.xcdatamodel */,
 				CE539E431A2465A000D1FAEB /* Model.xcdatamodel */,
 			);
-			currentVersion = CE539E431A2465A000D1FAEB /* Model.xcdatamodel */;
+			currentVersion = CE1297AF1A2631E9006E5046 /* Model2.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
