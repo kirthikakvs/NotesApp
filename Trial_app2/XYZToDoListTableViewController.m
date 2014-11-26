@@ -10,6 +10,7 @@
 #import "XYZToDoList.h"
 #import "XYZAddToDoItemViewController.h"
 #import "Note.h"
+#import "SimpleTableCell.h"
 
 @interface XYZToDoListTableViewController ()
 
@@ -114,15 +115,35 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
         NSLog(@"inside cellforrowatindexpath");
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ListPrototypeCell" forIndexPath:indexPath];
+    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ListPrototypeCell" forIndexPath:indexPath];
+    
+    
+    
+    static NSString *simpleTableIdentifier = @"SimpleTableCell";
+    
+    SimpleTableCell *cell = (SimpleTableCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    if (cell == nil)
+    {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SimpleTableCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
+    }
+    
+    
+    
+    
     
     NSManagedObject *Currentnote = [self.toDoItems objectAtIndex:indexPath.row];
+    
     //XYZToDoList *toDoItem=[self.toDoItems objectAtIndex:indexPath.row];
     NSLog(@"%@",[[Currentnote valueForKey:@"completed"] stringValue]);
-    [cell.textLabel setText:[NSString stringWithFormat:@"%@",[Currentnote valueForKey:@"note"]]];
-    if([[Currentnote valueForKey:@"completed"] boolValue]==YES)
+    [cell.noteLabel setText:[NSString stringWithFormat:@"%@",[Currentnote valueForKey:@"note"]]];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"MMM dd,yyyy HH:mm:ss a"];
+    
+     if([[Currentnote valueForKey:@"completed"] boolValue]==YES)
     {
         [Currentnote setValue:[NSNumber numberWithBool:YES] forKey:@"completed"];
+        cell.completedLabel.text = [NSString stringWithFormat:@"CompletedAt: %@",[formatter stringFromDate:[NSDate date]]];
         NSLog(@"if condition");
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
@@ -130,6 +151,7 @@
     {
         NSLog(@"else condition");
         [Currentnote setValue:[NSNumber numberWithBool:NO] forKey:@"completed"];
+        cell.completedLabel.text = [NSString stringWithFormat:@"CreatedAt: %@",[formatter stringFromDate:[Currentnote valueForKey:@"createdAt"]]];
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
     return cell;
@@ -197,6 +219,7 @@
     if ( [n isEqualToNumber:[NSNumber numberWithBool:NO]])
     {
         [selectednote setValue:[NSNumber numberWithBool:YES] forKey:@"completed"];
+        [selectednote setValue:[NSDate date] forKey:@"completedAt"];
         NSLog(@"after :%@", [[selectednote valueForKey:@"completed"] stringValue]);
         NSError *error = nil;
         if (![managedObjectContext save:&error]) {

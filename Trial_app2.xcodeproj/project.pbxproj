@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE1297B11A2633C0006E5046 /* SimpleTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE1297B01A2633C0006E5046 /* SimpleTableCell.xib */; };
+		CE1297B41A263845006E5046 /* SimpleTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1297B31A263845006E5046 /* SimpleTableCell.m */; };
 		CE539E161A23016600D1FAEB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE539E151A23016600D1FAEB /* main.m */; };
 		CE539E191A23016600D1FAEB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE539E181A23016600D1FAEB /* AppDelegate.m */; };
 		CE539E1C1A23016600D1FAEB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE539E1B1A23016600D1FAEB /* ViewController.m */; };
@@ -33,6 +35,9 @@
 
 /* Begin PBXFileReference section */
 		CE1297AF1A2631E9006E5046 /* Model2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model2.xcdatamodel; sourceTree = "<group>"; };
+		CE1297B01A2633C0006E5046 /* SimpleTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleTableCell.xib; sourceTree = "<group>"; };
+		CE1297B21A263845006E5046 /* SimpleTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleTableCell.h; sourceTree = "<group>"; };
+		CE1297B31A263845006E5046 /* SimpleTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTableCell.m; sourceTree = "<group>"; };
 		CE539E101A23016600D1FAEB /* Trial_app2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trial_app2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE539E141A23016600D1FAEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE539E151A23016600D1FAEB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -98,6 +103,9 @@
 			children = (
 				CE539E171A23016600D1FAEB /* AppDelegate.h */,
 				CE539E181A23016600D1FAEB /* AppDelegate.m */,
+				CE1297B01A2633C0006E5046 /* SimpleTableCell.xib */,
+				CE1297B21A263845006E5046 /* SimpleTableCell.h */,
+				CE1297B31A263845006E5046 /* SimpleTableCell.m */,
 				CE539E1A1A23016600D1FAEB /* ViewController.h */,
 				CE539E1B1A23016600D1FAEB /* ViewController.m */,
 				CE539E1D1A23016600D1FAEB /* Main.storyboard */,
@@ -225,6 +233,7 @@
 			files = (
 				CE539E1F1A23016600D1FAEB /* Main.storyboard in Resources */,
 				CE539E241A23016700D1FAEB /* LaunchScreen.xib in Resources */,
+				CE1297B11A2633C0006E5046 /* SimpleTableCell.xib in Resources */,
 				CE539E211A23016700D1FAEB /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -245,6 +254,7 @@
 			files = (
 				CE539E1C1A23016600D1FAEB /* ViewController.m in Sources */,
 				CE539E3B1A2332E000D1FAEB /* XYZAddToDoItemViewController.m in Sources */,
+				CE1297B41A263845006E5046 /* SimpleTableCell.m in Sources */,
 				CE539E3E1A2335B800D1FAEB /* XYZToDoListTableViewController.m in Sources */,
 				CE539E441A2465A000D1FAEB /* Model.xcdatamodeld in Sources */,
 				CE539E411A234E6400D1FAEB /* XYZToDoList.m in Sources */,
