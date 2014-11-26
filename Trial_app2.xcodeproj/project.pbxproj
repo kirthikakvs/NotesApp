@@ -14,6 +14,11 @@
 		CE539E211A23016700D1FAEB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE539E201A23016700D1FAEB /* Images.xcassets */; };
 		CE539E241A23016700D1FAEB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE539E221A23016700D1FAEB /* LaunchScreen.xib */; };
 		CE539E301A23016700D1FAEB /* Trial_app2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE539E2F1A23016700D1FAEB /* Trial_app2Tests.m */; };
+		CE539E3B1A2332E000D1FAEB /* XYZAddToDoItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE539E3A1A2332E000D1FAEB /* XYZAddToDoItemViewController.m */; };
+		CE539E3E1A2335B800D1FAEB /* XYZToDoListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE539E3D1A2335B800D1FAEB /* XYZToDoListTableViewController.m */; };
+		CE539E411A234E6400D1FAEB /* XYZToDoList.m in Sources */ = {isa = PBXBuildFile; fileRef = CE539E401A234E6400D1FAEB /* XYZToDoList.m */; };
+		CE539E441A2465A000D1FAEB /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE539E421A2465A000D1FAEB /* Model.xcdatamodeld */; };
+		CE539E471A246DCB00D1FAEB /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = CE539E461A246DCB00D1FAEB /* Note.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +45,15 @@
 		CE539E291A23016700D1FAEB /* Trial_app2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Trial_app2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE539E2E1A23016700D1FAEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE539E2F1A23016700D1FAEB /* Trial_app2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Trial_app2Tests.m; sourceTree = "<group>"; };
+		CE539E391A2332E000D1FAEB /* XYZAddToDoItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZAddToDoItemViewController.h; sourceTree = "<group>"; };
+		CE539E3A1A2332E000D1FAEB /* XYZAddToDoItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZAddToDoItemViewController.m; sourceTree = "<group>"; };
+		CE539E3C1A2335B800D1FAEB /* XYZToDoListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZToDoListTableViewController.h; sourceTree = "<group>"; };
+		CE539E3D1A2335B800D1FAEB /* XYZToDoListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZToDoListTableViewController.m; sourceTree = "<group>"; };
+		CE539E3F1A234E6400D1FAEB /* XYZToDoList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZToDoList.h; sourceTree = "<group>"; };
+		CE539E401A234E6400D1FAEB /* XYZToDoList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZToDoList.m; sourceTree = "<group>"; };
+		CE539E431A2465A000D1FAEB /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		CE539E451A246DCB00D1FAEB /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
+		CE539E461A246DCB00D1FAEB /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,9 +100,18 @@
 				CE539E1A1A23016600D1FAEB /* ViewController.h */,
 				CE539E1B1A23016600D1FAEB /* ViewController.m */,
 				CE539E1D1A23016600D1FAEB /* Main.storyboard */,
+				CE539E3C1A2335B800D1FAEB /* XYZToDoListTableViewController.h */,
+				CE539E3D1A2335B800D1FAEB /* XYZToDoListTableViewController.m */,
+				CE539E421A2465A000D1FAEB /* Model.xcdatamodeld */,
+				CE539E451A246DCB00D1FAEB /* Note.h */,
+				CE539E461A246DCB00D1FAEB /* Note.m */,
+				CE539E3F1A234E6400D1FAEB /* XYZToDoList.h */,
+				CE539E401A234E6400D1FAEB /* XYZToDoList.m */,
 				CE539E201A23016700D1FAEB /* Images.xcassets */,
 				CE539E221A23016700D1FAEB /* LaunchScreen.xib */,
 				CE539E131A23016600D1FAEB /* Supporting Files */,
+				CE539E391A2332E000D1FAEB /* XYZAddToDoItemViewController.h */,
+				CE539E3A1A2332E000D1FAEB /* XYZAddToDoItemViewController.m */,
 			);
 			path = Trial_app2;
 			sourceTree = "<group>";
@@ -220,8 +243,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE539E1C1A23016600D1FAEB /* ViewController.m in Sources */,
+				CE539E3B1A2332E000D1FAEB /* XYZAddToDoItemViewController.m in Sources */,
+				CE539E3E1A2335B800D1FAEB /* XYZToDoListTableViewController.m in Sources */,
+				CE539E441A2465A000D1FAEB /* Model.xcdatamodeld in Sources */,
+				CE539E411A234E6400D1FAEB /* XYZToDoList.m in Sources */,
 				CE539E191A23016600D1FAEB /* AppDelegate.m in Sources */,
 				CE539E161A23016600D1FAEB /* main.m in Sources */,
+				CE539E471A246DCB00D1FAEB /* Note.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +450,19 @@
 			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		CE539E421A2465A000D1FAEB /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CE539E431A2465A000D1FAEB /* Model.xcdatamodel */,
+			);
+			currentVersion = CE539E431A2465A000D1FAEB /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = CE539E081A23016600D1FAEB /* Project object */;
 }
