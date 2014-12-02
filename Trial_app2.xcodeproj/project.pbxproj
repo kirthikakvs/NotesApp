@@ -21,6 +21,8 @@
 		CE539E411A234E6400D1FAEB /* XYZToDoList.m in Sources */ = {isa = PBXBuildFile; fileRef = CE539E401A234E6400D1FAEB /* XYZToDoList.m */; };
 		CE539E441A2465A000D1FAEB /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE539E421A2465A000D1FAEB /* Model.xcdatamodeld */; };
 		CE539E471A246DCB00D1FAEB /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = CE539E461A246DCB00D1FAEB /* Note.m */; };
+		CE77310D1A2DBE4B00674026 /* Black-Background-Wood-black-wallpaper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE77310C1A2DBE4B00674026 /* Black-Background-Wood-black-wallpaper.jpg */; };
+		CE77310F1A2DBF6E00674026 /* color-theme-blue-green-white-keywords-decorative-backgrounds.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE77310E1A2DBF6E00674026 /* color-theme-blue-green-white-keywords-decorative-backgrounds.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,8 @@
 		CE539E431A2465A000D1FAEB /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		CE539E451A246DCB00D1FAEB /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
 		CE539E461A246DCB00D1FAEB /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
+		CE77310C1A2DBE4B00674026 /* Black-Background-Wood-black-wallpaper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Black-Background-Wood-black-wallpaper.jpg"; sourceTree = "<group>"; };
+		CE77310E1A2DBF6E00674026 /* color-theme-blue-green-white-keywords-decorative-backgrounds.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "color-theme-blue-green-white-keywords-decorative-backgrounds.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +133,8 @@
 			isa = PBXGroup;
 			children = (
 				CE539E141A23016600D1FAEB /* Info.plist */,
+				CE77310E1A2DBF6E00674026 /* color-theme-blue-green-white-keywords-decorative-backgrounds.jpg */,
+				CE77310C1A2DBE4B00674026 /* Black-Background-Wood-black-wallpaper.jpg */,
 				CE539E151A23016600D1FAEB /* main.m */,
 			);
 			name = "Supporting Files";
@@ -231,9 +237,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE77310D1A2DBE4B00674026 /* Black-Background-Wood-black-wallpaper.jpg in Resources */,
 				CE539E1F1A23016600D1FAEB /* Main.storyboard in Resources */,
 				CE539E241A23016700D1FAEB /* LaunchScreen.xib in Resources */,
 				CE1297B11A2633C0006E5046 /* SimpleTableCell.xib in Resources */,
+				CE77310F1A2DBF6E00674026 /* color-theme-blue-green-white-keywords-decorative-backgrounds.jpg in Resources */,
 				CE539E211A23016700D1FAEB /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

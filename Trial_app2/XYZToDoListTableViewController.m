@@ -43,6 +43,8 @@
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     NSFetchRequest *fetch = [[NSFetchRequest alloc]initWithEntityName:@"Note"];
     self.toDoItems = [[managedObjectContext executeFetchRequest:fetch error:nil]mutableCopy];
+    NSSortDescriptor *d = [NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:NO];
+    [self.toDoItems sortUsingDescriptors:[NSArray arrayWithObject:d]];
     [self.tableView reloadData];
 }
 
@@ -50,7 +52,7 @@
 {
     [super viewDidLoad];
     NSLog(@"Loaded view");
-    
+    self.view.backgroundColor = [[UIColor alloc]initWithPatternImage:[UIImage imageNamed:@"black-and-blue.jpg"]];
     self.toDoItems = [[NSMutableArray alloc]init];
         NSLog(@"Loaded Items");
     //[self loadInitialData];
@@ -143,7 +145,7 @@
      if([[Currentnote valueForKey:@"completed"] boolValue]==YES)
     {
         [Currentnote setValue:[NSNumber numberWithBool:YES] forKey:@"completed"];
-        cell.completedLabel.text = [NSString stringWithFormat:@"CompletedAt: %@",[formatter stringFromDate:[NSDate date]]];
+        cell.completedLabel.text = [NSString stringWithFormat:@"CompletedAt: %@",[formatter stringFromDate:[Currentnote valueForKey:@"completedAt"]]];
         NSLog(@"if condition");
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
