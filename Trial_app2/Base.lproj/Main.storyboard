@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="h7k-xh-eWu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="1Ej-h1-Rmd">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -71,7 +71,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
                 <exit id="dOp-n9-j29" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-829.5" y="608"/>
+            <point key="canvasLocation" x="88.5" y="608"/>
         </scene>
         <!--To-do List-->
         <scene sceneID="bze-NB-9Ke">
@@ -337,7 +337,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Ke-VB-msp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3421.5" y="608"/>
+            <point key="canvasLocation" x="-2503.5" y="608"/>
         </scene>
         <!--Sign In Scene-->
         <scene sceneID="kSu-me-W3o">
@@ -410,7 +410,6 @@
                                 </variation>
                                 <connections>
                                     <action selector="signInAction:" destination="h7k-xh-eWu" eventType="touchUpInside" id="bwc-Sa-J1h"/>
-                                    <segue destination="hAu-bC-ssZ" kind="show" id="KCR-wB-gXj"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="gpU-ci-qX7">
@@ -454,6 +453,7 @@
                             <outletCollection property="gestureRecognizers" destination="FSN-PR-UL3" appends="YES" id="Ez6-RP-1Rk"/>
                         </connections>
                     </view>
+                    <navigationItem key="navigationItem" id="XYE-jA-OzJ"/>
                     <connections>
                         <outlet property="passwordText" destination="lwp-qK-l6h" id="poW-wq-zok"/>
                         <outlet property="userNameText" destination="EOX-oJ-ePg" id="iQM-uf-DJk"/>
@@ -466,7 +466,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-7207.5" y="562"/>
+            <point key="canvasLocation" x="-6289.5" y="562"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PaB-2T-dzu">
@@ -484,7 +484,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="srn-iV-iSD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4699.5" y="608"/>
+            <point key="canvasLocation" x="-3781.5" y="608"/>
         </scene>
         <!--Sign Up Scene-->
         <scene sceneID="gTO-9Q-LXl">
@@ -639,13 +639,28 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qJ5-lY-yip" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2143.5" y="608"/>
+            <point key="canvasLocation" x="-1225.5" y="608"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="U5R-hl-pNm">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="1Ej-h1-Rmd" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="akm-An-Qf4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="h7k-xh-eWu" kind="relationship" relationship="rootViewController" id="UvL-kT-6gk"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aAx-DO-KZT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-7207.5" y="562"/>
         </scene>
     </scenes>
     <resources>
         <image name="Black-Background-Wood-black-wallpaper.jpg" width="502" height="314"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="KCR-wB-gXj"/>
-    </inferredMetricsTieBreakers>
 </document>

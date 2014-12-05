@@ -22,6 +22,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [[UIColor alloc]initWithPatternImage:[UIImage imageNamed:@"color-theme-blue-green-white-keywords-decorative-backgrounds.jpg"]];
+    self.passwordText.secureTextEntry = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,8 +81,8 @@
                               ^{
                                   userAlertView *alertView = [[userAlertView alloc] initWithTitle:@"Notes App" message:@"You have successfully signed in" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
                                   [alertView showWithCompletion:NULL];
-                                
-                                  
+                                  XYZToDoListTableViewController *tab = [[XYZToDoListTableViewController alloc]init];
+                                  [self.navigationController pushViewController:tab animated:YES];
                               });
                 }
                 else
