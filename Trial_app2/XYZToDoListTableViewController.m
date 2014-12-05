@@ -52,7 +52,6 @@
 {
     [super viewDidLoad];
     NSLog(@"Loaded view");
-    self.view.backgroundColor = [[UIColor alloc]initWithPatternImage:[UIImage imageNamed:@"black-and-blue.jpg"]];
     self.toDoItems = [[NSMutableArray alloc]init];
         NSLog(@"Loaded Items");
     //[self loadInitialData];

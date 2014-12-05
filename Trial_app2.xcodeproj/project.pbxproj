@@ -21,8 +21,12 @@
 		CE539E411A234E6400D1FAEB /* XYZToDoList.m in Sources */ = {isa = PBXBuildFile; fileRef = CE539E401A234E6400D1FAEB /* XYZToDoList.m */; };
 		CE539E441A2465A000D1FAEB /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE539E421A2465A000D1FAEB /* Model.xcdatamodeld */; };
 		CE539E471A246DCB00D1FAEB /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = CE539E461A246DCB00D1FAEB /* Note.m */; };
+		CE5A0A0F1A30607200BC72E7 /* userAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5A0A0E1A30607200BC72E7 /* userAlertView.m */; };
+		CE5A0A121A30611600BC72E7 /* UserAlertWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5A0A111A30611600BC72E7 /* UserAlertWrapper.m */; };
 		CE77310D1A2DBE4B00674026 /* Black-Background-Wood-black-wallpaper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE77310C1A2DBE4B00674026 /* Black-Background-Wood-black-wallpaper.jpg */; };
 		CE77310F1A2DBF6E00674026 /* color-theme-blue-green-white-keywords-decorative-backgrounds.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE77310E1A2DBF6E00674026 /* color-theme-blue-green-white-keywords-decorative-backgrounds.jpg */; };
+		CEE304651A2DD113001F0196 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE304641A2DD113001F0196 /* SignInViewController.m */; };
+		CEE304681A2DD129001F0196 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE304671A2DD129001F0196 /* SignUpViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,8 +66,16 @@
 		CE539E431A2465A000D1FAEB /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		CE539E451A246DCB00D1FAEB /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
 		CE539E461A246DCB00D1FAEB /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
+		CE5A0A0D1A30607200BC72E7 /* userAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = userAlertView.h; sourceTree = "<group>"; };
+		CE5A0A0E1A30607200BC72E7 /* userAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = userAlertView.m; sourceTree = "<group>"; };
+		CE5A0A101A30611600BC72E7 /* UserAlertWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAlertWrapper.h; sourceTree = "<group>"; };
+		CE5A0A111A30611600BC72E7 /* UserAlertWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAlertWrapper.m; sourceTree = "<group>"; };
 		CE77310C1A2DBE4B00674026 /* Black-Background-Wood-black-wallpaper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Black-Background-Wood-black-wallpaper.jpg"; sourceTree = "<group>"; };
 		CE77310E1A2DBF6E00674026 /* color-theme-blue-green-white-keywords-decorative-backgrounds.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "color-theme-blue-green-white-keywords-decorative-backgrounds.jpg"; sourceTree = "<group>"; };
+		CEE304631A2DD113001F0196 /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
+		CEE304641A2DD113001F0196 /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
+		CEE304661A2DD129001F0196 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
+		CEE304671A2DD129001F0196 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +125,14 @@
 				CE539E1A1A23016600D1FAEB /* ViewController.h */,
 				CE539E1B1A23016600D1FAEB /* ViewController.m */,
 				CE539E1D1A23016600D1FAEB /* Main.storyboard */,
+				CEE304631A2DD113001F0196 /* SignInViewController.h */,
+				CEE304641A2DD113001F0196 /* SignInViewController.m */,
+				CE5A0A0D1A30607200BC72E7 /* userAlertView.h */,
+				CE5A0A0E1A30607200BC72E7 /* userAlertView.m */,
+				CE5A0A101A30611600BC72E7 /* UserAlertWrapper.h */,
+				CE5A0A111A30611600BC72E7 /* UserAlertWrapper.m */,
+				CEE304661A2DD129001F0196 /* SignUpViewController.h */,
+				CEE304671A2DD129001F0196 /* SignUpViewController.m */,
 				CE539E3C1A2335B800D1FAEB /* XYZToDoListTableViewController.h */,
 				CE539E3D1A2335B800D1FAEB /* XYZToDoListTableViewController.m */,
 				CE539E421A2465A000D1FAEB /* Model.xcdatamodeld */,
@@ -260,6 +280,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE5A0A0F1A30607200BC72E7 /* userAlertView.m in Sources */,
+				CEE304651A2DD113001F0196 /* SignInViewController.m in Sources */,
 				CE539E1C1A23016600D1FAEB /* ViewController.m in Sources */,
 				CE539E3B1A2332E000D1FAEB /* XYZAddToDoItemViewController.m in Sources */,
 				CE1297B41A263845006E5046 /* SimpleTableCell.m in Sources */,
@@ -268,6 +290,8 @@
 				CE539E411A234E6400D1FAEB /* XYZToDoList.m in Sources */,
 				CE539E191A23016600D1FAEB /* AppDelegate.m in Sources */,
 				CE539E161A23016600D1FAEB /* main.m in Sources */,
+				CE5A0A121A30611600BC72E7 /* UserAlertWrapper.m in Sources */,
+				CEE304681A2DD129001F0196 /* SignUpViewController.m in Sources */,
 				CE539E471A246DCB00D1FAEB /* Note.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
