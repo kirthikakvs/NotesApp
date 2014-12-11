@@ -12,6 +12,7 @@
 #import "Note.h"
 #import "SimpleTableCell.h"
 
+
 @interface XYZToDoListTableViewController ()
 
 @property NSMutableArray *toDoItems;
@@ -21,7 +22,9 @@
 @implementation XYZToDoListTableViewController
 
 //View controller life cycle
-
+@synthesize tapCount;
+@synthesize tapTimer;
+@synthesize tappedRow;
 
 - (NSManagedObjectContext *)managedObjectContext
 {
@@ -40,56 +43,110 @@
     NSLog(@"Inside viewdidappear");
     [super viewDidAppear:animated];
     NSLog(@"After animation");
-    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
-    NSFetchRequest *fetch = [[NSFetchRequest alloc]initWithEntityName:@"Note"];
-    self.toDoItems = [[managedObjectContext executeFetchRequest:fetch error:nil]mutableCopy];
-    NSSortDescriptor *d = [NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:NO];
+    [[self navigationController] setNavigationBarHidden:NO];
+    NSSortDescriptor *d = [NSSortDescriptor sortDescriptorWithKey:@"created" ascending:NO];
     [self.toDoItems sortUsingDescriptors:[NSArray arrayWithObject:d]];
     [self.tableView reloadData];
+    
+    
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     NSLog(@"Loaded view");
+    [self.navigationItem.leftBarButtonItem setEnabled:NO];
     self.toDoItems = [[NSMutableArray alloc]init];
         NSLog(@"Loaded Items");
+    
+    
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        UICKeyChainStore *store = [UICKeyChainStore keyChainStoreWithService:@"com.notes.app"];
+        NSString *user_id = [store stringForKey:@"USER_ID"];
+        NSString *access_token = [store stringForKey:@"ACCESS_TOKEN"];
+        NSLog(@"USER_ID => %@, ACCESS_TOKEN => %@",user_id,access_token);
+        NSString *str = [NSString stringWithFormat:@"http://0.0.0.0:3000/notes/%@.json",user_id];
+        NSURL *u = [NSURL URLWithString:str ];
+        NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:u];
+        [req setHTTPMethod:@"GET"];
+        [req setValue:access_token forHTTPHeaderField:@"X-Api-Key"];
+        [req setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        NSURLSession *session = [NSURLSession sharedSession];
+        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:req completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+            NSLog(@"%@", json);
+            if( [response isKindOfClass:[NSHTTPURLResponse class]]){
+                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*) response;
+                
+                if ([httpResponse statusCode] == 401){
+                    dispatch_sync(dispatch_get_main_queue(),^{
+                        userAlertView *alertView = [[userAlertView alloc] initWithTitle:@"Notes App" message:@"Not Authorized." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                        [alertView showWithCompletion:NULL];
+                    });
+                    
+                }else{
+                    
+                    if ([json isKindOfClass:[NSDictionary class]])
+                    {
+                        NSMutableArray *notesArray = json[@"notes"];
+                        if ([notesArray isKindOfClass:[NSArray class]])
+                        {
+                            for (NSDictionary *dict in notesArray)
+                            {
+                                NSLog(@"Processing %@", dict);
+                                
+                                XYZToDoList *item = [[XYZToDoList alloc]init];
+                                item.content = [dict valueForKey:@"content"];
+                                item.status = [dict valueForKey:@"status"];
+                                NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+                                [formatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ssZ"];
+                                item.created = [formatter dateFromString:dict[@"created_at"]];
+                                item.updated = [formatter dateFromString:dict[@"updated_at"]];
+                                NSLog(@"%@",[[dict valueForKey:@"id"] class]);
+                                item.note_id = [dict valueForKey:@"id"];
+                                [self.toDoItems addObject:item];
+                            }
+                        }
+                    }
+                    dispatch_sync(dispatch_get_main_queue(),^{
+                        NSSortDescriptor *d = [NSSortDescriptor sortDescriptorWithKey:@"created" ascending:NO];
+                        [self.toDoItems sortUsingDescriptors:[NSArray arrayWithObject:d]];
+                        [self.tableView reloadData];
+                    });
+                    
+                }
+            }
+        }];
+        
+        [dataTask resume];
+    });
+    
     //[self loadInitialData];
         NSLog(@"Initialized items");
      
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 
 - (void)loadInitialData {
-    XYZToDoList *item1 = [[XYZToDoList alloc] init];
-    item1.itemName = @"Buy milk";
-    [self.toDoItems addObject:item1];
-    XYZToDoList *item2 = [[XYZToDoList alloc] init];
-    item2.itemName = @"Buy eggs";
-    [self.toDoItems addObject:item2];
-    XYZToDoList *item3 = [[XYZToDoList alloc] init];
-    item3.itemName = @"Read a book";
-    [self.toDoItems addObject:item3];
+  //  XYZToDoList *item1 = [[XYZToDoList alloc] init];
+  //  item1.itemName = @"Buy milk";
+   // [self.toDoItems addObject:item1];
+   // XYZToDoList *item2 = [[XYZToDoList alloc] init];
+   // item2.itemName = @"Buy eggs";
+    //[self.toDoItems addObject:item2];
+    //XYZToDoList *item3 = [[XYZToDoList alloc] init];
+    //item3.itemName = @"Read a book";
+    //[self.toDoItems addObject:item3];
 }
 
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 #pragma mark - Table view data source
 
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-
     // Return the number of sections.
     return 1;
 }
@@ -103,13 +160,13 @@
 
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue
 {
-   // XYZAddToDoItemViewController *source = [segue sourceViewController];
-   // XYZToDoList *item= source.toDotem;
-   // if(item!=nil)
-   // {
-   //     [self.toDoItems addObject:item];
-    //    [self.tableView reloadData];
-    //}
+   XYZAddToDoItemViewController *source = [segue sourceViewController];
+    XYZToDoList *item= source.toDotem;
+    if(item!=nil)
+    {
+        [self.toDoItems addObject:item];
+        [self.tableView reloadData];
+    }
 }
 
 
@@ -118,129 +175,126 @@
     
     //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ListPrototypeCell" forIndexPath:indexPath];
     
-    
-    
     static NSString *simpleTableIdentifier = @"SimpleTableCell";
-    
     SimpleTableCell *cell = (SimpleTableCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    if (cell == nil)
-    {
+    if (cell == nil){
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SimpleTableCell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
     
-    
-    
-    
-    
-    NSManagedObject *Currentnote = [self.toDoItems objectAtIndex:indexPath.row];
-    
-    //XYZToDoList *toDoItem=[self.toDoItems objectAtIndex:indexPath.row];
-    NSLog(@"%@",[[Currentnote valueForKey:@"completed"] stringValue]);
-    [cell.noteLabel setText:[NSString stringWithFormat:@"%@",[Currentnote valueForKey:@"note"]]];
+    XYZToDoList *toDoItem=[self.toDoItems objectAtIndex:indexPath.row];
+   [cell.noteLabel setText:toDoItem.content];
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"MMM dd,yyyy HH:mm:ss a"];
-    
-     if([[Currentnote valueForKey:@"completed"] boolValue]==YES)
-    {
-        [Currentnote setValue:[NSNumber numberWithBool:YES] forKey:@"completed"];
-        cell.completedLabel.text = [NSString stringWithFormat:@"CompletedAt: %@",[formatter stringFromDate:[Currentnote valueForKey:@"completedAt"]]];
-        NSLog(@"if condition");
+   [formatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ssZ"];
+    if([toDoItem.status isEqualToString:@"completed"]) {
+        NSDateFormatter *format = [[NSDateFormatter alloc]init];
+        [format setDateFormat:@"yyyy'-'MM'-'dd''HH':'mm'"];
+        cell.completedLabel.text = [@"Completed at:" stringByAppendingString:[format stringFromDate:toDoItem.updated]];
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
-    else
-    {
-        NSLog(@"else condition");
-        [Currentnote setValue:[NSNumber numberWithBool:NO] forKey:@"completed"];
-        cell.completedLabel.text = [NSString stringWithFormat:@"CreatedAt: %@",[formatter stringFromDate:[Currentnote valueForKey:@"createdAt"]]];
+    else if([toDoItem.status isEqualToString:@"Pending"]){
+        NSDateFormatter *format = [[NSDateFormatter alloc]init];
+        [format setDateFormat:@"yyyy'-'MM'-'dd''HH':'mm'"];
+        cell.completedLabel.text = [@"Created at:" stringByAppendingString:[format stringFromDate:toDoItem.created]];
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
     return cell;
 }
 
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 #pragma mark - Table View Delegate
 
+- (void)tapTimerFired:(NSTimer *)aTimer{
+    //timer fired, there was a single tap on indexPath.row = tappedRow
+    if(tapTimer != nil){
+        tapCount = 0;
+        tappedRow = -1;
+    }
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"inside didselectrowatindexpath");
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
-    NSManagedObject *selectednote = [self.toDoItems objectAtIndex:indexPath.row];
     
-    NSNumber *n= [selectednote valueForKey:@"completed"];
-    
-    NSLog(@"before : %@", [n stringValue]);
-    
-    if ( [n isEqualToNumber:[NSNumber numberWithBool:NO]])
-    {
-        [selectednote setValue:[NSNumber numberWithBool:YES] forKey:@"completed"];
-        [selectednote setValue:[NSDate date] forKey:@"completedAt"];
-        NSLog(@"after :%@", [[selectednote valueForKey:@"completed"] stringValue]);
-        NSError *error = nil;
-        if (![managedObjectContext save:&error]) {
-            NSLog(@"Can't Delete! %@ %@", error, [error localizedDescription]);
-            return;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        
+        NSLog(@"inside didselectrowatindexpath");
+        
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+        
+        XYZToDoList *toDoItem=[self.toDoItems objectAtIndex:indexPath.row];
+        
+        NSLog(@"before : %@", toDoItem.status);
+        
+        if ([toDoItem.status isEqualToString:@"Pending"])
+            
+        {
+            
+            toDoItem.status = @"completed";
+            
+            toDoItem.updated = [NSDate date];
+            
+            NSLog(@"after :%@",toDoItem.status);
+            
         }
-    }
-    else
-    {
-        [selectednote setValue:[NSNumber numberWithBool:NO] forKey:@"completed"];
-        NSLog(@"after :%@", [[selectednote valueForKey:@"completed"] stringValue]);
-        NSError *error = nil;
-        if (![managedObjectContext save:&error]) {
-            NSLog(@"Can't Delete! %@ %@", error, [error localizedDescription]);
-            return;
+        
+        else
+            
+        {
+            
+            toDoItem.status = @"Pending";
+            
         }
-    }
-    //XYZToDoList *TappedItem = [self.toDoItems objectAtIndex:indexPath.row];
-    //TappedItem.completed = !TappedItem.completed;
-    
+        
+        NSString *str = [NSString stringWithFormat:@"http://0.0.0.0:3000/notes/%@.json",[toDoItem.note_id description]];
+        
+        NSURL *u = [NSURL URLWithString:str ];
+        
+        NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:u];
+        
+        [req setHTTPMethod:@"PUT"];
+        
+        [req setValue:@"450461847a6c150257e0d583d68ffd9f" forHTTPHeaderField:@"X-Api-Key"];
+        
+        [req setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        
+        [req setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        
+        NSString *stringData = [NSString stringWithFormat:@"{ \"note\" : { \"content\":\"%@\", \"status\":\"%@\" } }",toDoItem.content,toDoItem.status];
+        
+        NSLog(@"%@",stringData);
+        
+        [req setHTTPBody:[stringData dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        NSURLSession *session = [NSURLSession sharedSession];
+        
+        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:req completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+            
+            NSLog(@"%@", json);
+            
+            if( [response isKindOfClass:[NSHTTPURLResponse class]]){
+                
+                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*) response;
+                
+                if ([httpResponse statusCode] == 401){
+                    
+                    dispatch_sync(dispatch_get_main_queue(),^{
+                        
+                        userAlertView *alertView = [[userAlertView alloc] initWithTitle:@"Notes App" message:@"Invalid Update." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                        
+                        [alertView showWithCompletion:NULL];
+                        
+                    });
+                    
+                }
+                
+            }
+            
+        }];
+        
+        [dataTask resume];
+        
+    });
     [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
@@ -270,5 +324,7 @@
 {
     return 94;
 }
+
+
 
 @end

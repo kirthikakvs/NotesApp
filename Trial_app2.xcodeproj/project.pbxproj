@@ -12,7 +12,6 @@
 		CE539E161A23016600D1FAEB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE539E151A23016600D1FAEB /* main.m */; };
 		CE539E191A23016600D1FAEB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE539E181A23016600D1FAEB /* AppDelegate.m */; };
 		CE539E1C1A23016600D1FAEB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE539E1B1A23016600D1FAEB /* ViewController.m */; };
-		CE539E1F1A23016600D1FAEB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE539E1D1A23016600D1FAEB /* Main.storyboard */; };
 		CE539E211A23016700D1FAEB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE539E201A23016700D1FAEB /* Images.xcassets */; };
 		CE539E241A23016700D1FAEB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE539E221A23016700D1FAEB /* LaunchScreen.xib */; };
 		CE539E301A23016700D1FAEB /* Trial_app2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE539E2F1A23016700D1FAEB /* Trial_app2Tests.m */; };
@@ -23,6 +22,12 @@
 		CE539E471A246DCB00D1FAEB /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = CE539E461A246DCB00D1FAEB /* Note.m */; };
 		CE5A0A0F1A30607200BC72E7 /* userAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5A0A0E1A30607200BC72E7 /* userAlertView.m */; };
 		CE5A0A121A30611600BC72E7 /* UserAlertWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5A0A111A30611600BC72E7 /* UserAlertWrapper.m */; };
+		CE6B6D881A3589A80045C409 /* 1916561.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE6B6D871A3589A70045C409 /* 1916561.jpg */; };
+		CE6B6DCD1A35B1650045C409 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE6B6DCB1A35B1650045C409 /* Main.storyboard */; };
+		CE6B6DD01A36BE8E0045C409 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6B6DCF1A36BE8E0045C409 /* User.m */; };
+		CE6B6DD31A36D15C0045C409 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6B6DD21A36D15C0045C409 /* KeychainItemWrapper.m */; };
+		CE6B6DD61A36F3D60045C409 /* UICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6B6DD51A36F3D60045C409 /* UICKeyChainStore.m */; };
+		CE6B6DD81A36F4AF0045C409 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6B6DD71A36F4AF0045C409 /* Security.framework */; };
 		CE77310D1A2DBE4B00674026 /* Black-Background-Wood-black-wallpaper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE77310C1A2DBE4B00674026 /* Black-Background-Wood-black-wallpaper.jpg */; };
 		CE77310F1A2DBF6E00674026 /* color-theme-blue-green-white-keywords-decorative-backgrounds.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE77310E1A2DBF6E00674026 /* color-theme-blue-green-white-keywords-decorative-backgrounds.jpg */; };
 		CEE304651A2DD113001F0196 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE304641A2DD113001F0196 /* SignInViewController.m */; };
@@ -51,7 +56,6 @@
 		CE539E181A23016600D1FAEB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		CE539E1A1A23016600D1FAEB /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		CE539E1B1A23016600D1FAEB /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		CE539E1E1A23016600D1FAEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CE539E201A23016700D1FAEB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CE539E231A23016700D1FAEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		CE539E291A23016700D1FAEB /* Trial_app2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Trial_app2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,6 +74,15 @@
 		CE5A0A0E1A30607200BC72E7 /* userAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = userAlertView.m; sourceTree = "<group>"; };
 		CE5A0A101A30611600BC72E7 /* UserAlertWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAlertWrapper.h; sourceTree = "<group>"; };
 		CE5A0A111A30611600BC72E7 /* UserAlertWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAlertWrapper.m; sourceTree = "<group>"; };
+		CE6B6D871A3589A70045C409 /* 1916561.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1916561.jpg; sourceTree = "<group>"; };
+		CE6B6DCC1A35B1650045C409 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Trial_app2/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CE6B6DCE1A36BE8E0045C409 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		CE6B6DCF1A36BE8E0045C409 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		CE6B6DD11A36D15C0045C409 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
+		CE6B6DD21A36D15C0045C409 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
+		CE6B6DD41A36F3D60045C409 /* UICKeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICKeyChainStore.h; sourceTree = "<group>"; };
+		CE6B6DD51A36F3D60045C409 /* UICKeyChainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICKeyChainStore.m; sourceTree = "<group>"; };
+		CE6B6DD71A36F4AF0045C409 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		CE77310C1A2DBE4B00674026 /* Black-Background-Wood-black-wallpaper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Black-Background-Wood-black-wallpaper.jpg"; sourceTree = "<group>"; };
 		CE77310E1A2DBF6E00674026 /* color-theme-blue-green-white-keywords-decorative-backgrounds.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "color-theme-blue-green-white-keywords-decorative-backgrounds.jpg"; sourceTree = "<group>"; };
 		CEE304631A2DD113001F0196 /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
@@ -83,6 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE6B6DD81A36F4AF0045C409 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +113,7 @@
 		CE539E071A23016600D1FAEB = {
 			isa = PBXGroup;
 			children = (
+				CE6B6DD71A36F4AF0045C409 /* Security.framework */,
 				CE539E121A23016600D1FAEB /* Trial_app2 */,
 				CE539E2C1A23016700D1FAEB /* Trial_app2Tests */,
 				CE539E111A23016600D1FAEB /* Products */,
@@ -124,10 +139,10 @@
 				CE1297B31A263845006E5046 /* SimpleTableCell.m */,
 				CE539E1A1A23016600D1FAEB /* ViewController.h */,
 				CE539E1B1A23016600D1FAEB /* ViewController.m */,
-				CE539E1D1A23016600D1FAEB /* Main.storyboard */,
 				CEE304631A2DD113001F0196 /* SignInViewController.h */,
 				CEE304641A2DD113001F0196 /* SignInViewController.m */,
 				CE5A0A0D1A30607200BC72E7 /* userAlertView.h */,
+				CE6B6DCB1A35B1650045C409 /* Main.storyboard */,
 				CE5A0A0E1A30607200BC72E7 /* userAlertView.m */,
 				CE5A0A101A30611600BC72E7 /* UserAlertWrapper.h */,
 				CE5A0A111A30611600BC72E7 /* UserAlertWrapper.m */,
@@ -135,6 +150,12 @@
 				CEE304671A2DD129001F0196 /* SignUpViewController.m */,
 				CE539E3C1A2335B800D1FAEB /* XYZToDoListTableViewController.h */,
 				CE539E3D1A2335B800D1FAEB /* XYZToDoListTableViewController.m */,
+				CE6B6DCE1A36BE8E0045C409 /* User.h */,
+				CE6B6DCF1A36BE8E0045C409 /* User.m */,
+				CE6B6DD11A36D15C0045C409 /* KeychainItemWrapper.h */,
+				CE6B6DD21A36D15C0045C409 /* KeychainItemWrapper.m */,
+				CE6B6DD41A36F3D60045C409 /* UICKeyChainStore.h */,
+				CE6B6DD51A36F3D60045C409 /* UICKeyChainStore.m */,
 				CE539E421A2465A000D1FAEB /* Model.xcdatamodeld */,
 				CE539E451A246DCB00D1FAEB /* Note.h */,
 				CE539E461A246DCB00D1FAEB /* Note.m */,
@@ -154,6 +175,7 @@
 			children = (
 				CE539E141A23016600D1FAEB /* Info.plist */,
 				CE77310E1A2DBF6E00674026 /* color-theme-blue-green-white-keywords-decorative-backgrounds.jpg */,
+				CE6B6D871A3589A70045C409 /* 1916561.jpg */,
 				CE77310C1A2DBE4B00674026 /* Black-Background-Wood-black-wallpaper.jpg */,
 				CE539E151A23016600D1FAEB /* main.m */,
 			);
@@ -257,8 +279,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE6B6DCD1A35B1650045C409 /* Main.storyboard in Resources */,
 				CE77310D1A2DBE4B00674026 /* Black-Background-Wood-black-wallpaper.jpg in Resources */,
-				CE539E1F1A23016600D1FAEB /* Main.storyboard in Resources */,
+				CE6B6D881A3589A80045C409 /* 1916561.jpg in Resources */,
 				CE539E241A23016700D1FAEB /* LaunchScreen.xib in Resources */,
 				CE1297B11A2633C0006E5046 /* SimpleTableCell.xib in Resources */,
 				CE77310F1A2DBF6E00674026 /* color-theme-blue-green-white-keywords-decorative-backgrounds.jpg in Resources */,
@@ -287,7 +310,10 @@
 				CE1297B41A263845006E5046 /* SimpleTableCell.m in Sources */,
 				CE539E3E1A2335B800D1FAEB /* XYZToDoListTableViewController.m in Sources */,
 				CE539E441A2465A000D1FAEB /* Model.xcdatamodeld in Sources */,
+				CE6B6DD61A36F3D60045C409 /* UICKeyChainStore.m in Sources */,
 				CE539E411A234E6400D1FAEB /* XYZToDoList.m in Sources */,
+				CE6B6DD01A36BE8E0045C409 /* User.m in Sources */,
+				CE6B6DD31A36D15C0045C409 /* KeychainItemWrapper.m in Sources */,
 				CE539E191A23016600D1FAEB /* AppDelegate.m in Sources */,
 				CE539E161A23016600D1FAEB /* main.m in Sources */,
 				CE5A0A121A30611600BC72E7 /* UserAlertWrapper.m in Sources */,
@@ -315,20 +341,21 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		CE539E1D1A23016600D1FAEB /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CE539E1E1A23016600D1FAEB /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		CE539E221A23016700D1FAEB /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				CE539E231A23016700D1FAEB /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		CE6B6DCB1A35B1650045C409 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE6B6DCC1A35B1650045C409 /* Base */,
+			);
+			name = Main.storyboard;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -10,9 +10,9 @@
 
 @interface XYZToDoList : NSObject
 
-@property NSString *itemName;
-@property BOOL completed;
-@property (readonly) NSDate *created;
-
-
+@property NSString *content;
+@property NSString *status;
+@property NSDate *created;
+@property NSDate *updated;
+@property NSNumber *note_id;
 @end

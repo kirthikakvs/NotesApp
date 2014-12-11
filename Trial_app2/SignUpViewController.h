@@ -7,7 +7,40 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "userAlertView.h"
+#import "XYZToDoListTableViewController.h"
+#import "UICKeyChainStore.h"
 
-@interface SignUpViewController : UIViewController
+@interface SignUpViewController : UIViewController<UITextFieldDelegate>
+
+{
+    NSString *errormessage;
+}
+
+@property (weak, nonatomic) IBOutlet UITextField *nameText;
+
+
+@property (weak, nonatomic) IBOutlet UITextField *emailText;
+
+
+@property (weak, nonatomic) IBOutlet UITextField *passwordText;
+
+
+
+@property (weak, nonatomic) IBOutlet UITextField *confirmPasswordText;
+
+
+- (IBAction)backgroundTap:(id)sender;
+
+
+- (IBAction)signUp:(id)sender;
+
+
+
+
+
+
+
+
 
 @end

@@ -10,4 +10,10 @@
 
 @implementation XYZToDoList
 
+@synthesize content;
+@synthesize created;
+@synthesize updated;
+@synthesize status;
+@synthesize note_id;
+
 @end

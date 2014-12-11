@@ -7,13 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "userAlertView.h"
+#import "UICKeyChainStore.h"
 
 @interface XYZToDoListTableViewController : UITableViewController
+{
+}
+@property int tapCount;
 
+@property NSTimer *tapTimer;
+
+@property int tappedRow;
 
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue;
-
+- (void)tapTimerFired:(NSTimer *)aTimer;
++ (void) noteEdit;
 
 //retain vs strong
 
