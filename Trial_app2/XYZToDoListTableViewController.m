@@ -22,12 +22,8 @@
 @implementation XYZToDoListTableViewController
 
 //View controller life cycle
-@synthesize tapCount;
-@synthesize tapTimer;
-@synthesize tappedRow;
 
-- (NSManagedObjectContext *)managedObjectContext
-{
+- (NSManagedObjectContext *)managedObjectContext{
     NSManagedObjectContext *context= nil;
     id delegate = [[UIApplication sharedApplication] delegate];
     if ([delegate performSelector:@selector(managedObjectContext)])
@@ -59,14 +55,14 @@
     self.toDoItems = [[NSMutableArray alloc]init];
         NSLog(@"Loaded Items");
     
-    
+    tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:nil];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         UICKeyChainStore *store = [UICKeyChainStore keyChainStoreWithService:@"com.notes.app"];
         NSString *user_id = [store stringForKey:@"USER_ID"];
         NSString *access_token = [store stringForKey:@"ACCESS_TOKEN"];
         NSLog(@"USER_ID => %@, ACCESS_TOKEN => %@",user_id,access_token);
-        NSString *str = [NSString stringWithFormat:@"http://0.0.0.0:3000/notes/%@.json",user_id];
+        NSString *str = [NSString stringWithFormat:@"http://192.168.5.179:3000/notes.json"];
         NSURL *u = [NSURL URLWithString:str ];
         NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:u];
         [req setHTTPMethod:@"GET"];
@@ -84,9 +80,7 @@
                         userAlertView *alertView = [[userAlertView alloc] initWithTitle:@"Notes App" message:@"Not Authorized." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
                         [alertView showWithCompletion:NULL];
                     });
-                    
                 }else{
-                    
                     if ([json isKindOfClass:[NSDictionary class]])
                     {
                         NSMutableArray *notesArray = json[@"notes"];
@@ -158,30 +152,45 @@
 }
 
 
+- (IBAction)logout:(id)sender {
+    [self performSegueWithIdentifier:@"logout_path" sender:self];
+    
+}
+
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue
 {
    XYZAddToDoItemViewController *source = [segue sourceViewController];
     XYZToDoList *item= source.toDotem;
-    if(item!=nil)
+    if([source.taps isEqualToNumber:[NSNumber numberWithInt:2]])
     {
-        [self.toDoItems addObject:item];
-        [self.tableView reloadData];
+        if(item!=nil)
+        {
+            [self.toDoItems replaceObjectAtIndex:tappedRow withObject:item];
+            [self.tableView reloadData];
+        }
+        
+    }
+    else
+    {
+        if(item!=nil)
+        {
+            [self.toDoItems addObject:item];
+            [self.tableView reloadData];
+        }
     }
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
         NSLog(@"inside cellforrowatindexpath");
-    
-    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ListPrototypeCell" forIndexPath:indexPath];
-    
     static NSString *simpleTableIdentifier = @"SimpleTableCell";
     SimpleTableCell *cell = (SimpleTableCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    if (cell == nil){
+    if (!cell){
+        //All cell initializations should happen here.
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SimpleTableCell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
+        cell.delegate = self;
     }
-    
     XYZToDoList *toDoItem=[self.toDoItems objectAtIndex:indexPath.row];
    [cell.noteLabel setText:toDoItem.content];
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
@@ -203,17 +212,148 @@
 
 #pragma mark - Table View Delegate
 
-- (void)tapTimerFired:(NSTimer *)aTimer{
-    //timer fired, there was a single tap on indexPath.row = tappedRow
-    if(tapTimer != nil){
-        tapCount = 0;
+- (void)tapTimerFired:(NSTimer *)aTimer
+{
+    // timer fired, there was a single tap on indexPath.row = tappedRow
+    
+    // do something here with tappedRow
+    
+   // [cell setSelected:NO animated:YES];  // maybe, maybe not
+    
+    if (tapTimer != nil)
+    {
+        self.tapCount = 0;
         tappedRow = -1;
     }
 }
 
+-(void) handleSingleTap{
+    NSLog(@"Im currently toggling the completed state !!!");
+      NSLog(@"Selected row %@",[NSString stringWithFormat:@"%d",tappedRow]);
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        
+        
+        UICKeyChainStore *store = [UICKeyChainStore keyChainStoreWithService:@"com.notes.app"];
+        NSString *user_id = [store stringForKey:@"USER_ID"];
+        NSString *access_token = [store stringForKey:@"ACCESS_TOKEN"];
+        NSLog(@"inside didselectrowatindexpath");
+        
+        [self.tableView deselectRowAtIndexPath:self.path animated:YES];
+        
+        XYZToDoList *toDoItem=[self.toDoItems objectAtIndex:self.path.row];
+        
+        NSLog(@"before : %@", toDoItem.status);
+        
+        if ([toDoItem.status isEqualToString:@"Pending"])
+            
+        {
+            
+            toDoItem.status = @"completed";
+            
+            toDoItem.updated = [NSDate date];
+            
+            NSLog(@"after :%@",toDoItem.status);
+            
+        }
+        
+        else
+            
+        {
+            
+            toDoItem.status = @"Pending";
+            
+        }
+        
+        NSString *str = [NSString stringWithFormat:@"http://192.168.5.179:3000/notes/%@.json",[toDoItem.note_id description]];
+        
+        NSURL *u = [NSURL URLWithString:str ];
+        
+        NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:u];
+        
+        [req setHTTPMethod:@"PUT"];
+        
+        [req setValue:access_token forHTTPHeaderField:@"X-Api-Key"];
+        
+        [req setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        
+        [req setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        
+        NSString *stringData = [NSString stringWithFormat:@"{ \"note\" : { \"content\":\"%@\", \"status\":\"%@\" } }",toDoItem.content,toDoItem.status];
+        
+        NSLog(@"%@",stringData);
+        
+        [req setHTTPBody:[stringData dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        NSURLSession *session = [NSURLSession sharedSession];
+        
+        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:req completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+            
+            NSLog(@"%@", json);
+            
+            if( [response isKindOfClass:[NSHTTPURLResponse class]]){
+                
+                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*) response;
+                
+                if ([httpResponse statusCode] == 401){
+                    
+                    dispatch_sync(dispatch_get_main_queue(),^{
+                        
+                        userAlertView *alertView = [[userAlertView alloc] initWithTitle:@"Notes App" message:@"Invalid Update." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                        
+                        [alertView showWithCompletion:NULL];
+                        
+                    });
+                    
+                }
+                
+            }
+            
+        }];
+        
+        [dataTask resume];
+        
+    });
+    [self.tableView reloadRowsAtIndexPaths:@[self.path] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+-(void)handleDoubleTap{
+    NSLog(@"Double tapping Now !!!");
+    self.tapCount=[NSNumber numberWithInt:2];
+    NSLog(@"%@",[NSString stringWithFormat:@"%d",tappedRow]);
+    self.editItem = [self.toDoItems objectAtIndex:self.path.row];
+    [self performSegueWithIdentifier:@"edit_path" sender:self];
+    
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([self.tapCount isEqualToNumber:[NSNumber numberWithInt:2]])
+    {
+    UINavigationController *nav = [segue destinationViewController];
+    XYZAddToDoItemViewController *dest = (XYZAddToDoItemViewController*)nav.topViewController;
+    NSLog(@"%@",[sender description]);
+    dest.send = sender;
+    dest.toDotem = self.editItem;
+    dest.taps = self.tapCount;
+    NSLog(@"Item content to be edited => %@",dest.toDotem.content);
+    }
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    tappedRow = indexPath.row;
+    self.path = indexPath;
+    return nil;
+}
+ 
+/*
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+    [tapGesture setCancelsTouchesInView:YES];
+    [tapGesture setDelaysTouchesBegan:YES];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         
         NSLog(@"inside didselectrowatindexpath");
@@ -244,7 +384,7 @@
             
         }
         
-        NSString *str = [NSString stringWithFormat:@"http://0.0.0.0:3000/notes/%@.json",[toDoItem.note_id description]];
+        NSString *str = [NSString stringWithFormat:@"http://192.168.5.179:3000/notes/%@.json",[toDoItem.note_id description]];
         
         NSURL *u = [NSURL URLWithString:str ];
         
@@ -297,19 +437,40 @@
     });
     [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
-
+*/
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
-    [managedObjectContext deleteObject:[self.toDoItems objectAtIndex:indexPath.row]];
-    
-    NSError *error = nil;
-    if (![managedObjectContext save:&error]) {
-        NSLog(@"Can't Delete! %@ %@", error, [error localizedDescription]);
-        return;
-    }
-    [self.toDoItems removeObjectAtIndex:indexPath.row];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        NSLog(@"inside editingStyleforRowAtIndexPath");
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+        XYZToDoList *toDoItem=[self.toDoItems objectAtIndex:indexPath.row];
+        UICKeyChainStore *store = [UICKeyChainStore keyChainStoreWithService:@"com.notes.app"];
+        NSString *user_id = [store stringForKey:@"USER_ID"];
+        NSString *access_token = [store stringForKey:@"ACCESS_TOKEN"];
+        NSString *str = [NSString stringWithFormat:@"http://192.168.5.179:3000/notes/%@.json",[toDoItem.note_id description]];
+        NSURL *u = [NSURL URLWithString:str ];
+        NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:u];
+        [req setHTTPMethod:@"DELETE"];
+        [req setValue:access_token forHTTPHeaderField:@"X-Api-Key"];
+        [req setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [req setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        NSURLSession *session = [NSURLSession sharedSession];
+        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:req completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+            NSLog(@"%@", json);
+            if( [response isKindOfClass:[NSHTTPURLResponse class]]){
+                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*) response;
+                if ([httpResponse statusCode] == 401){
+                    dispatch_sync(dispatch_get_main_queue(),^{
+                        userAlertView *alertView = [[userAlertView alloc] initWithTitle:@"Notes App" message:@"Invalid Update." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                        [alertView showWithCompletion:NULL];
+                        });
+                }
+            }
+        }];
+        [dataTask resume];
+    });
     [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView reloadData];
 }

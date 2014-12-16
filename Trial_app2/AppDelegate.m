@@ -16,9 +16,31 @@
 
 @implementation AppDelegate
 
+- (BOOL) application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    
+    return YES;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
+    self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main.storyboard" bundle:nil];
+    UICKeyChainStore *store = [UICKeyChainStore keyChainStoreWithService:@"com.notes.app"];
+    NSString *user_id = [store stringForKey:@"USER_ID"];
+    NSString *access_token = [store stringForKey:@"ACCESS_TOKEN"];
+    if (user_id && access_token)
+    {
+        XYZToDoListTableViewController *initialViewController = [[XYZToDoListTableViewController alloc] init];
+        self.window.rootViewController =initialViewController;
+        [self.window makeKeyAndVisible];
+    }
+    else
+    {
+        SignInViewController *initialController = [[SignInViewController alloc]init];
+        self.window.rootViewController = initialController;
+            [self.window makeKeyAndVisible];
+    }
     return YES;
 }
 

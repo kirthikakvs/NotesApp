@@ -18,10 +18,10 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 
-@property XYZToDoList *toDotem;
-
-
-
+@property (nonatomic,strong)XYZToDoList *toDotem;
+@property (nonatomic,strong) id send;
+@property (nonatomic,strong) XYZToDoList *editedItem;
+@property (nonatomic,strong) NSNumber *taps;
 
 
 

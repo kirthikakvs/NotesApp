@@ -9,20 +9,26 @@
 #import <UIKit/UIKit.h>
 #import "userAlertView.h"
 #import "UICKeyChainStore.h"
-
-@interface XYZToDoListTableViewController : UITableViewController
+#import "SimpleTableCell.h"
+#import "XYZToDoList.h"
+@interface XYZToDoListTableViewController : UITableViewController <SimpleTableCellDelegate>
 {
+    NSTimer *tapTimer;
+    int tappedRow, doubleTapRow;
+
+    UITapGestureRecognizer *tapGesture;
 }
-@property int tapCount;
 
-@property NSTimer *tapTimer;
-
-@property int tappedRow;
+- (IBAction)logout:(id)sender;
 
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue;
 - (void)tapTimerFired:(NSTimer *)aTimer;
 + (void) noteEdit;
 
+@property (nonatomic,strong) NSNumber * tapCount;
+@property (nonatomic,strong) XYZToDoList *editItem;
+@property (nonatomic, strong) NSString *var2;
+@property (nonatomic,strong) NSIndexPath *path;
 //retain vs strong
 
 

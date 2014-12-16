@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "XYZToDoListTableViewController.h"
 #import "UICKeyChainStore.h"
+#import "SignInViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

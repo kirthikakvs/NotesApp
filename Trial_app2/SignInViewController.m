@@ -21,7 +21,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [[UIColor alloc]initWithPatternImage:[UIImage imageNamed:@"1916561.jpg"]];
+    UIImage *image = [UIImage imageNamed:@"0210.jpg"];
+    UIImageView *backgroundView = [[UIImageView alloc] initWithImage:image];
+    backgroundView.contentMode = UIViewContentModeScaleAspectFit;
+    backgroundView.autoresizingMask =
+    ( UIViewAutoresizingFlexibleBottomMargin
+     | UIViewAutoresizingFlexibleHeight
+     | UIViewAutoresizingFlexibleLeftMargin
+     | UIViewAutoresizingFlexibleRightMargin
+     | UIViewAutoresizingFlexibleTopMargin
+     | UIViewAutoresizingFlexibleWidth );
+    [self.view addSubview:backgroundView];
+    UIInterpolatingMotionEffect *verticalMotionEffect= [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
+    verticalMotionEffect.minimumRelativeValue = @(-30);
+    verticalMotionEffect.maximumRelativeValue = @(30);
+    UIInterpolatingMotionEffect *horizontalMotionEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
+    horizontalMotionEffect.minimumRelativeValue = @(-30);
+    horizontalMotionEffect.maximumRelativeValue =@(30);
+    UIMotionEffectGroup *effectGroup = [UIMotionEffectGroup new];
+    effectGroup.motionEffects = @[horizontalMotionEffect,verticalMotionEffect];
+    [backgroundView addMotionEffect:effectGroup];
     self.passwordText.secureTextEntry = YES;
     // remove this later
     
@@ -38,7 +57,7 @@
     NSLog(@"signin started");
     NSString *email = self.userNameText.text;
     NSString *pass = self.passwordText.text;
-    NSString *str = [NSString stringWithFormat:@"http://0.0.0.0:3000/signin.json?email=%@&password=%@",email,pass];
+    NSString *str = [NSString stringWithFormat:@"http://192.168.5.179:3000/signin.json?email=%@&password=%@",email,pass];
     NSURL *u = [NSURL URLWithString:str ];
     NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:u];
     [req setHTTPMethod:@"GET"];

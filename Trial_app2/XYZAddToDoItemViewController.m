@@ -38,6 +38,42 @@
     }
     if(self.textField.text.length >0)
     {
+        if ([self.taps isEqualToNumber:[NSNumber numberWithInt:2]])
+        {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                self.toDotem.content = self.textField.text;
+                UICKeyChainStore *store = [UICKeyChainStore keyChainStoreWithService:@"com.notes.app"];
+                NSString *user_id = [store stringForKey:@"USER_ID"];
+                NSString *access_token = [store stringForKey:@"ACCESS_TOKEN"];
+                NSString *str = [NSString stringWithFormat:@"http://192.168.5.179:3000/notes/%@.json",[self.toDotem.note_id description]];
+                NSURL *u = [NSURL URLWithString:str ];
+                NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:u];
+                [req setHTTPMethod:@"PUT"];
+                [req setValue:access_token forHTTPHeaderField:@"X-Api-Key"];
+                [req setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+                [req setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+                NSString *stringData = [NSString stringWithFormat:@"{ \"note\" : { \"content\":\"%@\", \"status\":\"%@\" } }",self.toDotem.content,self.toDotem.status];
+                NSLog(@"%@",stringData);
+                [req setHTTPBody:[stringData dataUsingEncoding:NSUTF8StringEncoding]];
+                NSURLSession *session = [NSURLSession sharedSession];
+                NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:req completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                    NSLog(@"%@", json);
+                    if( [response isKindOfClass:[NSHTTPURLResponse class]]){
+                        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*) response;
+                        if ([httpResponse statusCode] == 401){
+                            dispatch_sync(dispatch_get_main_queue(),^{
+                                userAlertView *alertView = [[userAlertView alloc] initWithTitle:@"Notes App" message:@"Invalid Update." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                                [alertView showWithCompletion:NULL];
+                            });
+                        }
+                    }
+                }];
+                [dataTask resume];
+            });
+        }
+        else
+        {
         self.toDotem = [[XYZToDoList alloc]init];
         self.toDotem.content = self.textField.text;
         self.toDotem.status = @"Pending";
@@ -46,7 +82,7 @@
         UICKeyChainStore *store = [UICKeyChainStore keyChainStoreWithService:@"com.notes.app"];
         NSString *user_id = [store stringForKey:@"USER_ID"];
         NSString *access_token = [store stringForKey:@"ACCESS_TOKEN"];
-        NSString *str = [NSString stringWithFormat:@"http://0.0.0.0:3000/notes.json?content=%@",self.toDotem.content];
+        NSString *str = [NSString stringWithFormat:@"http://192.168.5.179:3000/notes.json?content=%@",self.toDotem.content];
         NSURL *u = [NSURL URLWithString:str ];
         NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:u];
         [req setHTTPMethod:@"POST"];
@@ -66,17 +102,38 @@
                         dispatch_sync(dispatch_get_main_queue(),^{
                             userAlertView *alertView = [[userAlertView alloc] initWithTitle:@"Notes App" message:@"Invalid Update." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
                             [alertView showWithCompletion:NULL];
-                        });
-                    }
-                }
-            }];
+                        });}}}];
             [dataTask resume];
-        });
-    [self dismissViewControllerAnimated:YES completion:nil];
+        });}
+        //[self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIImage *image = [UIImage imageNamed:@"0210.jpg"];
+    UIImageView *backgroundView = [[UIImageView alloc] initWithImage:image];
+    backgroundView.contentMode = UIViewContentModeScaleAspectFit;
+    backgroundView.autoresizingMask =
+    ( UIViewAutoresizingFlexibleBottomMargin
+     | UIViewAutoresizingFlexibleHeight
+     | UIViewAutoresizingFlexibleLeftMargin
+     | UIViewAutoresizingFlexibleRightMargin
+     | UIViewAutoresizingFlexibleTopMargin
+     | UIViewAutoresizingFlexibleWidth );
+    [self.view addSubview:backgroundView];
+    UIInterpolatingMotionEffect *verticalMotionEffect= [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
+    verticalMotionEffect.minimumRelativeValue = @(-30);
+    verticalMotionEffect.maximumRelativeValue = @(30);
+    UIInterpolatingMotionEffect *horizontalMotionEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
+    horizontalMotionEffect.minimumRelativeValue = @(-30);
+    horizontalMotionEffect.maximumRelativeValue =@(30);
+    UIMotionEffectGroup *effectGroup = [UIMotionEffectGroup new];
+    effectGroup.motionEffects = @[horizontalMotionEffect,verticalMotionEffect];
+    [backgroundView addMotionEffect:effectGroup];
+    if(self.send)
+    {
+        self.textField.text = self.toDotem.content;
+    }
     // Do any additional setup after loading the view.
 }
 

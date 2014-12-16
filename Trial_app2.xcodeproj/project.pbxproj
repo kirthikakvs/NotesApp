@@ -30,6 +30,7 @@
 		CE6B6DD81A36F4AF0045C409 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6B6DD71A36F4AF0045C409 /* Security.framework */; };
 		CE77310D1A2DBE4B00674026 /* Black-Background-Wood-black-wallpaper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE77310C1A2DBE4B00674026 /* Black-Background-Wood-black-wallpaper.jpg */; };
 		CE77310F1A2DBF6E00674026 /* color-theme-blue-green-white-keywords-decorative-backgrounds.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE77310E1A2DBF6E00674026 /* color-theme-blue-green-white-keywords-decorative-backgrounds.jpg */; };
+		CEC4DE731A3F05D5005C2B79 /* 0210.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CEC4DE721A3F05D5005C2B79 /* 0210.jpg */; };
 		CEE304651A2DD113001F0196 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE304641A2DD113001F0196 /* SignInViewController.m */; };
 		CEE304681A2DD129001F0196 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE304671A2DD129001F0196 /* SignUpViewController.m */; };
 /* End PBXBuildFile section */
@@ -85,6 +86,7 @@
 		CE6B6DD71A36F4AF0045C409 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		CE77310C1A2DBE4B00674026 /* Black-Background-Wood-black-wallpaper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Black-Background-Wood-black-wallpaper.jpg"; sourceTree = "<group>"; };
 		CE77310E1A2DBF6E00674026 /* color-theme-blue-green-white-keywords-decorative-backgrounds.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "color-theme-blue-green-white-keywords-decorative-backgrounds.jpg"; sourceTree = "<group>"; };
+		CEC4DE721A3F05D5005C2B79 /* 0210.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 0210.jpg; sourceTree = "<group>"; };
 		CEE304631A2DD113001F0196 /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
 		CEE304641A2DD113001F0196 /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
 		CEE304661A2DD129001F0196 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			children = (
 				CE539E141A23016600D1FAEB /* Info.plist */,
 				CE77310E1A2DBF6E00674026 /* color-theme-blue-green-white-keywords-decorative-backgrounds.jpg */,
+				CEC4DE721A3F05D5005C2B79 /* 0210.jpg */,
 				CE6B6D871A3589A70045C409 /* 1916561.jpg */,
 				CE77310C1A2DBE4B00674026 /* Black-Background-Wood-black-wallpaper.jpg */,
 				CE539E151A23016600D1FAEB /* main.m */,
@@ -248,6 +251,7 @@
 				TargetAttributes = {
 					CE539E0F1A23016600D1FAEB = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = PKUQ4ZWJH3;
 					};
 					CE539E281A23016700D1FAEB = {
 						CreatedOnToolsVersion = 6.1;
@@ -281,6 +285,7 @@
 			files = (
 				CE6B6DCD1A35B1650045C409 /* Main.storyboard in Resources */,
 				CE77310D1A2DBE4B00674026 /* Black-Background-Wood-black-wallpaper.jpg in Resources */,
+				CEC4DE731A3F05D5005C2B79 /* 0210.jpg in Resources */,
 				CE6B6D881A3589A80045C409 /* 1916561.jpg in Resources */,
 				CE539E241A23016700D1FAEB /* LaunchScreen.xib in Resources */,
 				CE1297B11A2633C0006E5046 /* SimpleTableCell.xib in Resources */,

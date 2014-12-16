@@ -10,10 +10,25 @@
 
 @implementation SimpleTableCell
 
+-(void) handleSingleTapLocally{
+    [self.delegate handleSingleTap];
+    //   NSLog(@"Selected row %@",[NSString stringWithFormat:@"%d",tappedRow]);
+}
 
-@synthesize noteLabel=_noteLabel;
-@synthesize completedLabel=_completedLabel;
 
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+    float delay = 0.2;
+    
+    if(((UITouch *)[touches anyObject]).tapCount == 1){
+        [self performSelector:@selector(handleSingleTapLocally) withObject:nil afterDelay:delay];
+    }
+    
+    if(((UITouch *)[touches anyObject]).tapCount == 2){
+        [NSObject cancelPreviousPerformRequestsWithTarget:self];
+        [self.delegate handleDoubleTap];
+    }
+    [super touchesEnded:touches withEvent:event];
+}
 
 - (void)awakeFromNib {
     // Initialization code
@@ -24,7 +39,6 @@
 
     // Configure the view for the selected state
 }
-
 
 
 @end
