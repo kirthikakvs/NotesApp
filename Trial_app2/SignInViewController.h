@@ -28,6 +28,6 @@
 
 - (IBAction)signInAction:(id)sender;
 
-- (void) sendMessage:(NSString *) status;
+
 
 @end

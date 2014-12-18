@@ -11,7 +11,7 @@
 #import "XYZToDoListTableViewController.h"
 #import "UICKeyChainStore.h"
 
-@interface SignUpViewController : UIViewController<UITextFieldDelegate>
+@interface SignUpViewController : UIViewController<UITextFieldDelegate,UIScrollViewDelegate>
 
 {
     NSString *errormessage;
@@ -19,12 +19,15 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *nameText;
 
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
 
 @property (weak, nonatomic) IBOutlet UITextField *emailText;
 
 
 @property (weak, nonatomic) IBOutlet UITextField *passwordText;
 
+- (IBAction)backToSignIn:(id)sender;
 
 
 @property (weak, nonatomic) IBOutlet UITextField *confirmPasswordText;

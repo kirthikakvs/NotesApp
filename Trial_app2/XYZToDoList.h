@@ -14,5 +14,5 @@
 @property NSString *status;
 @property NSDate *created;
 @property NSDate *updated;
-@property NSNumber *note_id;
+@property NSString *note_id;
 @end

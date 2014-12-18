@@ -23,7 +23,9 @@
     // Do any additional setup after loading the view.
     UIImage *image = [UIImage imageNamed:@"0210.jpg"];
     UIImageView *backgroundView = [[UIImageView alloc] initWithImage:image];
-    backgroundView.contentMode = UIViewContentModeScaleAspectFit;
+    CGRect scaledImageRect = CGRectMake( backgroundView.frame.origin.x - 15.0 ,backgroundView.frame.origin.y - 15.0, backgroundView.image.size.width + 10.0 , backgroundView.image.size.width + 10.0);
+    backgroundView.frame = scaledImageRect;
+    backgroundView.contentMode = UIViewContentModeScaleAspectFill;
     backgroundView.autoresizingMask =
     ( UIViewAutoresizingFlexibleBottomMargin
      | UIViewAutoresizingFlexibleHeight
@@ -42,61 +44,56 @@
     effectGroup.motionEffects = @[horizontalMotionEffect,verticalMotionEffect];
     [backgroundView addMotionEffect:effectGroup];
     self.passwordText.secureTextEntry = YES;
-    // remove this later
-    
-   // XYZToDoListTableViewController *tab = [[XYZToDoListTableViewController alloc]init];
-    
-   // [self.navigationController pushViewController:tab animated:YES];
-}
+    }
 
 - (IBAction)backgroundTap:(id)sender {
     [self.view endEditing:YES];
 }
 
 - (IBAction)signInAction:(id)sender {
-    NSLog(@"signin started");
-    NSString *email = self.userNameText.text;
-    NSString *pass = self.passwordText.text;
-    NSString *str = [NSString stringWithFormat:@"http://192.168.5.179:3000/signin.json?email=%@&password=%@",email,pass];
-    NSURL *u = [NSURL URLWithString:str ];
-    NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:u];
-    [req setHTTPMethod:@"GET"];
-    [req setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:req completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-        NSLog(@"%@", json);
-        if( [response isKindOfClass:[NSHTTPURLResponse class]]){
-            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*) response;
-
-            if ([httpResponse statusCode] == 401){
-                dispatch_sync(dispatch_get_main_queue(),^{
-                    userAlertView *alertView = [[userAlertView alloc] initWithTitle:@"Notes App" message:@"Invalid Username or password." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-                    [alertView showWithCompletion:NULL];
-                });
-                
-            }else{
-                dispatch_sync(dispatch_get_main_queue(),^{
-                    NSString *accessToken=[json valueForKey:@"access_token"];
-                    NSString *userID=[[json valueForKey:@"user_id"] description];
-                    UICKeyChainStore *store = [UICKeyChainStore keyChainStoreWithService:@"com.notes.app"];
-                    store[@"ACCESS_TOKEN"] = accessToken;
-                    store[@"USER_ID"] = userID;
-                    [store synchronize];
-                    NSLog(@"from keychain : %@",[store stringForKey:@"ACCESS_TOKEN"]);
-                    //Show Alert
-                    //userAlertView *alertView = [[userAlertView alloc] initWithTitle:@"Notes App" message:@"You have successfully signed in" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-                    //[alertView showWithCompletion:NULL];
-                    [self performSegueWithIdentifier:@"success_path" sender:self];
-                    //XYZToDoListTableViewController *tab = [[XYZToDoListTableViewController alloc]init];
-                    //[self.navigationController pushViewController:tab animated:YES];
-                    
-                });
+    UIActivityIndicatorView *ac = [[UIActivityIndicatorView alloc]
+                                   initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    ac.center = self.view.center;
+    [self.view addSubview:ac];
+    [ac startAnimating];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        NSLog(@"signin started");
+        NSString *email = self.userNameText.text;
+        NSString *pass = self.passwordText.text;
+        NSString *str = [NSString stringWithFormat:@"http://192.168.5.179:3000/signin.json?email=%@&password=%@",email,pass];
+        NSURL *u = [NSURL URLWithString:str ];
+        NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:u];
+        [req setHTTPMethod:@"GET"];
+        [req setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        NSURLSession *session = [NSURLSession sharedSession];
+        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:req completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+            NSLog(@"%@", json);
+            if( [response isKindOfClass:[NSHTTPURLResponse class]]){
+                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*) response;
+                if ([httpResponse statusCode] == 200){
+                    dispatch_sync(dispatch_get_main_queue(),^{
+                        NSString *accessToken=[json valueForKey:@"access_token"];
+                        NSString *userID=[[json valueForKey:@"user_id"] description];
+                        UICKeyChainStore *store = [UICKeyChainStore keyChainStoreWithService:@"com.notes.app"];
+                        store[@"ACCESS_TOKEN"] = accessToken;
+                        store[@"USER_ID"] = userID;
+                        [store synchronize];
+                        NSLog(@"from keychain : %@",[store stringForKey:@"ACCESS_TOKEN"]);
+                        [ac stopAnimating];
+                        [self performSegueWithIdentifier:@"success_path" sender:self];
+                    });
+                }else{
+                    dispatch_sync(dispatch_get_main_queue(),^{
+                        userAlertView *alertView = [[userAlertView alloc] initWithTitle:@"Notes App" message:@"Invalid Username or password." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                        [alertView showWithCompletion:NULL];
+                    });
+                }
             }
-        }
-    }];
-    
-    [dataTask resume];
+        }];
+        
+        [dataTask resume];
+    });
 }
 
 

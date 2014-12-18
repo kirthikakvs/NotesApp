@@ -11,6 +11,9 @@
 #import "UICKeyChainStore.h"
 #import "SimpleTableCell.h"
 #import "XYZToDoList.h"
+#import "NSDate+NVTimeAgo.h"
+#import "Mobihelp.h"
+
 @interface XYZToDoListTableViewController : UITableViewController <SimpleTableCellDelegate>
 {
     NSTimer *tapTimer;
@@ -20,10 +23,11 @@
 }
 
 - (IBAction)logout:(id)sender;
-
+- (void) reloadData;
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue;
 - (void)tapTimerFired:(NSTimer *)aTimer;
 + (void) noteEdit;
+- (void) showSupport;
 
 @property (nonatomic,strong) NSNumber * tapCount;
 @property (nonatomic,strong) XYZToDoList *editItem;

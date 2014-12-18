@@ -88,21 +88,26 @@
         [req setHTTPMethod:@"POST"];
         [req setValue:access_token forHTTPHeaderField:@"X-Api-Key"];
         [req setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-        [req setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        //NSString *stringData = [NSString stringWithFormat:@"{ \"note\" : { \"content\":\"%@\", \"status\":\"%@\" } }",self.toDotem.content,self.toDotem.status];
-        //NSLog(@"%@",stringData);
-        //[req setHTTPBody:[stringData dataUsingEncoding:NSUTF8StringEncoding]];
         NSURLSession *session = [NSURLSession sharedSession];
         NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:req completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-            NSLog(@"%@", json);
+            NSLog(@"JSON RESPONSE => %@ ", json);
             if( [response isKindOfClass:[NSHTTPURLResponse class]]){
                 NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*) response;
                 if ([httpResponse statusCode] == 401){
                         dispatch_sync(dispatch_get_main_queue(),^{
                             userAlertView *alertView = [[userAlertView alloc] initWithTitle:@"Notes App" message:@"Invalid Update." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
                             [alertView showWithCompletion:NULL];
-                        });}}}];
+                        });
+                }
+                else
+                {
+                    //NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+                    //[f setNumberStyle:NSNumberFormatterDecimalStyle];
+                    self.toDotem.note_id = [[json valueForKey:@"id"] description];
+                    NSLog(@"NOTE_ID => %@",self.toDotem.note_id);
+                }
+            }}];
             [dataTask resume];
         });}
         //[self dismissViewControllerAnimated:YES completion:nil];
@@ -112,7 +117,9 @@
     [super viewDidLoad];
     UIImage *image = [UIImage imageNamed:@"0210.jpg"];
     UIImageView *backgroundView = [[UIImageView alloc] initWithImage:image];
-    backgroundView.contentMode = UIViewContentModeScaleAspectFit;
+    CGRect scaledImageRect = CGRectMake( backgroundView.frame.origin.x - 18.0 ,backgroundView.frame.origin.y - 15.0, backgroundView.image.size.width + 10.0 , backgroundView.image.size.width + 10.0);
+    backgroundView.frame = scaledImageRect;
+    backgroundView.contentMode = UIViewContentModeScaleAspectFill;
     backgroundView.autoresizingMask =
     ( UIViewAutoresizingFlexibleBottomMargin
      | UIViewAutoresizingFlexibleHeight

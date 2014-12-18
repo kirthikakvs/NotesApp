@@ -25,22 +25,25 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main.storyboard" bundle:nil];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
     UICKeyChainStore *store = [UICKeyChainStore keyChainStoreWithService:@"com.notes.app"];
     NSString *user_id = [store stringForKey:@"USER_ID"];
     NSString *access_token = [store stringForKey:@"ACCESS_TOKEN"];
     if (user_id && access_token)
     {
-        XYZToDoListTableViewController *initialViewController = [[XYZToDoListTableViewController alloc] init];
-        self.window.rootViewController =initialViewController;
+        UIViewController *notesController = [storyboard instantiateViewControllerWithIdentifier:@"NotesNavigationController"];
+        self.window.rootViewController = notesController;
         [self.window makeKeyAndVisible];
     }
     else
     {
-        SignInViewController *initialController = [[SignInViewController alloc]init];
-        self.window.rootViewController = initialController;
-            [self.window makeKeyAndVisible];
+        UIViewController *signin = [storyboard instantiateViewControllerWithIdentifier:@"SignInNavigation"];
+        self.window.rootViewController = signin;
+        [self.window makeKeyAndVisible];
     }
+    MobihelpConfig *config = [[MobihelpConfig alloc]initWithDomain:@"rexinc.freshdesk.com" withAppKey:@"notesapp-2-2cc34b4abbc4644a11e678e95570c719" andAppSecret:@"7cbe1bf637c70519f9f96a29d0985be8a7285566"];
+    [[Mobihelp sharedInstance]initWithConfig:config];
     return YES;
 }
 

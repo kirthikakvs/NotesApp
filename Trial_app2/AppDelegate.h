@@ -11,6 +11,7 @@
 #import "XYZToDoListTableViewController.h"
 #import "UICKeyChainStore.h"
 #import "SignInViewController.h"
+#import "Mobihelp.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
