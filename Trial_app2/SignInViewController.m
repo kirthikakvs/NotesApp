@@ -20,6 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[Mobihelp sharedInstance] leaveBreadcrumb:@"Sign in"];
     // Do any additional setup after loading the view.
     UIImage *image = [UIImage imageNamed:@"0210.jpg"];
     UIImageView *backgroundView = [[UIImageView alloc] initWithImage:image];
@@ -75,6 +76,10 @@
                     dispatch_sync(dispatch_get_main_queue(),^{
                         NSString *accessToken=[json valueForKey:@"access_token"];
                         NSString *userID=[[json valueForKey:@"user_id"] description];
+                        NSString *userName = [json valueForKey:@"user_name"];
+                        NSString *userEmail = [json valueForKey:@"user_email"];
+                        [[Mobihelp sharedInstance] setUserName:userName];
+                        [[Mobihelp sharedInstance] setEmailAddress:userEmail];
                         UICKeyChainStore *store = [UICKeyChainStore keyChainStoreWithService:@"com.notes.app"];
                         store[@"ACCESS_TOKEN"] = accessToken;
                         store[@"USER_ID"] = userID;

@@ -23,6 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[Mobihelp sharedInstance] leaveBreadcrumb:@"Sign Up"];
     UIImage *image = [UIImage imageNamed:@"0210.jpg"];
     UIImageView *backgroundView = [[UIImageView alloc] initWithImage:image];
     CGRect scaledImageRect = CGRectMake( backgroundView.frame.origin.x - 15.0 ,backgroundView.frame.origin.y - 15.0, backgroundView.image.size.width + 10.0 , backgroundView.image.size.width + 10.0);

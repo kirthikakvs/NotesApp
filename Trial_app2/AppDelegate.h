@@ -7,22 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreData/CoreData.h>
-#import "XYZToDoListTableViewController.h"
-#import "UICKeyChainStore.h"
-#import "SignInViewController.h"
-#import "Mobihelp.h"
+#import "NetworkCalls.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
-@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (strong,nonatomic) UIStoryboard *storyboard;
 
-- (void)saveContext;
-- (NSURL *)applicationDocumentsDirectory;
-
+- (void) signIn;
+- (void) alreadySignedIn;
+- (void) mobihelpConfig;
 
 @end
 

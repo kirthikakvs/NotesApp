@@ -9,7 +9,6 @@
 #import "XYZToDoListTableViewController.h"
 #import "XYZToDoList.h"
 #import "XYZAddToDoItemViewController.h"
-#import "Note.h"
 #import "SimpleTableCell.h"
 
 
@@ -50,6 +49,7 @@
 
 - (void) showSupport
 {
+    
     [[Mobihelp sharedInstance] presentSupport:self];
 }
 
@@ -154,6 +154,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[Mobihelp sharedInstance] leaveBreadcrumb:@"Viewing Notes"];
     NSLog(@"Loaded view");
     [self.navigationItem.leftBarButtonItem setEnabled:YES];
     self.toDoItems = [[NSMutableArray alloc]init];
@@ -273,6 +274,7 @@
         NSLog(@"USER_ID => %@, ACCESS_TOKEN => %@",user_id,access_token);
         [store removeItemForKey:@"USER_ID"];
         [store removeItemForKey:@"ACCESS_TOKEN"];
+        [[Mobihelp sharedInstance] clearUserData];
         NSString *str = [NSString stringWithFormat:@"http://192.168.5.179:3000/notes/signout.json"];
         NSURL *u = [NSURL URLWithString:str ];
         NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:u];

@@ -9,6 +9,11 @@
 #import "AppDelegate.h"
 #import <CoreData/CoreData.h>
 #import "XYZToDoListTableViewController.h"
+#import "UICKeyChainStore.h"
+#import "SignInViewController.h"
+#import "Mobihelp.h"
+#import "NotesConstants.h"
+#import "NetworkCalls.h"
 
 @interface AppDelegate ()
 
@@ -16,156 +21,81 @@
 
 @implementation AppDelegate
 
-- (BOOL) application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    
+- (BOOL) application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
     return YES;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
+    self.storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    [self mobihelpConfig];
     UICKeyChainStore *store = [UICKeyChainStore keyChainStoreWithService:@"com.notes.app"];
     NSString *user_id = [store stringForKey:@"USER_ID"];
     NSString *access_token = [store stringForKey:@"ACCESS_TOKEN"];
-    if (user_id && access_token)
-    {
-        UIViewController *notesController = [storyboard instantiateViewControllerWithIdentifier:@"NotesNavigationController"];
-        self.window.rootViewController = notesController;
-        [self.window makeKeyAndVisible];
+    if (user_id && access_token){
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            NSLog(@"Verifying Credentials");
+            NSString *str = [NSString stringWithFormat:GET_USER,user_id];
+            NSHTTPURLResponse *response = [NetworkCalls sendRequestWithoutData:str REQ_TYPE:@"GET" ACCESS_TOKEN:access_token];
+            NSURL *u = [NSURL URLWithString:str ];
+            NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:u];
+            [req setHTTPMethod:@"GET"];
+            [req setValue:access_token forHTTPHeaderField:@"X-Api-Key"];
+            [req setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+            NSURLSession *session = [NSURLSession sharedSession];
+            NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:req completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                NSLog(@"%@", json);
+                if( [response isKindOfClass:[NSHTTPURLResponse class]]){
+                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*) response;
+                    if ([httpResponse statusCode] == 200){
+                        dispatch_sync(dispatch_get_main_queue(),^{
+                            [[Mobihelp sharedInstance] leaveBreadcrumb:@"Already signed in."];
+                            NSString *accessToken=[json valueForKey:@"access_token"];
+                            NSString *userID=[[json valueForKey:@"user_id"] description];
+                            NSString *userName = [json valueForKey:@"user_name"];
+                            NSString *userEmail = [json valueForKey:@"user_email"];
+                            [[Mobihelp sharedInstance] setUserName:userName];
+                            [[Mobihelp sharedInstance] setEmailAddress:userEmail];
+                            UICKeyChainStore *store = [UICKeyChainStore keyChainStoreWithService:@"com.notes.app"];
+                            store[@"ACCESS_TOKEN"] = accessToken;
+                            store[@"USER_ID"] = userID;
+                            [store synchronize];
+                            NSLog(@"from keychain : %@",[store stringForKey:@"ACCESS_TOKEN"]);
+                            UIViewController *notesController = [self.storyboard instantiateViewControllerWithIdentifier:@"NotesNavigationController"];
+                            self.window.rootViewController = notesController;
+                            [self.window makeKeyAndVisible];
+                        });
+                    }
+                }
+            }];
+            [dataTask resume];
+        });
     }
     else
     {
-        UIViewController *signin = [storyboard instantiateViewControllerWithIdentifier:@"SignInNavigation"];
-        self.window.rootViewController = signin;
-        [self.window makeKeyAndVisible];
+        [self signIn];
     }
-    MobihelpConfig *config = [[MobihelpConfig alloc]initWithDomain:@"rexinc.freshdesk.com" withAppKey:@"notesapp-2-2cc34b4abbc4644a11e678e95570c719" andAppSecret:@"7cbe1bf637c70519f9f96a29d0985be8a7285566"];
-    [[Mobihelp sharedInstance]initWithConfig:config];
     return YES;
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+-(void) mobihelpConfig{
+    MobihelpConfig *config = [[MobihelpConfig alloc]initWithDomain:@"rexinc.freshdesk.com" withAppKey:@"notesapp-2-2cc34b4abbc4644a11e678e95570c719" andAppSecret:@"7cbe1bf637c70519f9f96a29d0985be8a7285566"];
+    config.launchCountForAppReviewPrompt = 10;
+    config.feedbackType = FEEDBACK_TYPE_NAME_REQUIRED_AND_EMAIL_OPTIONAL;
+    [[Mobihelp sharedInstance]initWithConfig:config];
+    [[Mobihelp sharedInstance] leaveBreadcrumb:@"Notes App started"];
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+-(void) signIn{
+    UIViewController *signin = [self.storyboard instantiateViewControllerWithIdentifier:@"SignInNavigation"];
+    self.window.rootViewController = signin;
+    [self.window makeKeyAndVisible];
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
-
-
-
-
-
-#pragma mark - Core Data stack
-
-@synthesize managedObjectContext = _managedObjectContext;
-@synthesize managedObjectModel = _managedObjectModel;
-@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
-
-
-
-
-- (NSURL *)applicationDocumentsDirectory {
-    // The directory the application uses to store the Core Data store file. This code uses a directory named "com.example.Trial_app2_app" in the application's documents directory.
+-(void) alreadySignedIn{
     
-    NSLog(@"%@",[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory  inDomains:NSUserDomainMask] lastObject]);
-    
-    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
-
-- (NSManagedObjectModel *)managedObjectModel {
-    // The managed object model for the application. It is a fatal error for the application not to be able to find and load its model.
-    if (_managedObjectModel != nil) {
-        return _managedObjectModel;
-    }
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Model" withExtension:@"momd"];
-    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-    return _managedObjectModel;
-}
-
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
-    // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it.
-    if (_persistentStoreCoordinator != nil) {
-        return _persistentStoreCoordinator;
-    }
-    
-    // Create the coordinator and store
-    
-    //_persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Trial_app2.sqlite"];
-    NSError *error = nil;
-    NSString *failureReason = @"There was an error creating or loading the application's saved data.";
-    
-    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    
-    NSDictionary *options = @{ NSMigratePersistentStoresAutomaticallyOption : @(YES),
-                               NSInferMappingModelAutomaticallyOption : @(YES) };
-    
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
-        // Report any error we got.
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        dict[NSLocalizedDescriptionKey] = @"Failed to initialize the application's saved data";
-        dict[NSLocalizedFailureReasonErrorKey] = failureReason;
-        dict[NSUnderlyingErrorKey] = error;
-        error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
-        // Replace this with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
-    
-    return _persistentStoreCoordinator;
-}
-
-
-- (NSManagedObjectContext *)managedObjectContext {
-    // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.)
-    if (_managedObjectContext != nil) {
-        return _managedObjectContext;
-    }
-    
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (!coordinator) {
-        return nil;
-    }
-    _managedObjectContext = [[NSManagedObjectContext alloc] init];
-    [_managedObjectContext setPersistentStoreCoordinator:coordinator];
-    return _managedObjectContext;
-}
-
-#pragma mark - Core Data Saving support
-
-- (void)saveContext {
-    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-    if (managedObjectContext != nil) {
-        NSError *error = nil;
-        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
-        }
-    }
-}
-
-
 
 @end

@@ -8,7 +8,6 @@
 
 #import "XYZAddToDoItemViewController.h"
 #import "XYZToDoListTableViewController.h"
-#import "Note.h"
 #import <CoreData/CoreData.h>
 
 
@@ -40,6 +39,7 @@
     {
         if ([self.taps isEqualToNumber:[NSNumber numberWithInt:2]])
         {
+            [[Mobihelp sharedInstance] leaveBreadcrumb:@"Note edited."];
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                 self.toDotem.content = self.textField.text;
                 UICKeyChainStore *store = [UICKeyChainStore keyChainStoreWithService:@"com.notes.app"];
@@ -74,6 +74,7 @@
         }
         else
         {
+            [[Mobihelp sharedInstance] leaveBreadcrumb:@"Note Added."];
         self.toDotem = [[XYZToDoList alloc]init];
         self.toDotem.content = self.textField.text;
         self.toDotem.status = @"Pending";
@@ -115,6 +116,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[Mobihelp sharedInstance] leaveBreadcrumb:@"Adding/Editing a note"];
     UIImage *image = [UIImage imageNamed:@"0210.jpg"];
     UIImageView *backgroundView = [[UIImageView alloc] initWithImage:image];
     CGRect scaledImageRect = CGRectMake( backgroundView.frame.origin.x - 18.0 ,backgroundView.frame.origin.y - 15.0, backgroundView.image.size.width + 10.0 , backgroundView.image.size.width + 10.0);
