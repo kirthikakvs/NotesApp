@@ -17,6 +17,7 @@
 - (void) signIn;
 - (void) alreadySignedIn;
 - (void) mobihelpConfig;
-
+- (void) parseData;
+- (void) processResponse;
 @end
 

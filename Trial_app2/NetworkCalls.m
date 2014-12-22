@@ -9,27 +9,35 @@
 #import "NetworkCalls.h"
 #import "NotesConstants.h"
 
-static NSHTTPURLResponse *resp;
+static NetworkCalls *sharedNetworkCall = nil;
+static NSMutableDictionary *resp;
 
 @implementation NetworkCalls
 
++ (NetworkCalls*)sharedNetworkCall {
+    	    if (sharedNetworkCall == nil) {
+        	        sharedNetworkCall = [[NetworkCalls alloc]init];
+                	    // initialize your variables here
+        	    }
+    	    return sharedNetworkCall;
+    	}
 
-
-+ (NSHTTPURLResponse *) sendRequestWithoutData:(NSString *)url REQ_TYPE:(NSString*)req ACCESS_TOKEN:(NSString*)access
+- (NSMutableDictionary *) sendRequestWithoutData:(NSString *)url REQ_TYPE:(NSString*)reqType ACCESS_TOKEN:(NSString*)access
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+    dispatch_async(dispatch_get_main_queue(),^{
         NSURL *u = [NSURL URLWithString:url ];
         NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:u];
-        [req setHTTPMethod:req];
+        [req setHTTPMethod:reqType];
         [req setValue:access forHTTPHeaderField:API_KEY];
         [req setValue:URL_CONTENT forHTTPHeaderField:@"Accept"];
         [req setValue:URL_CONTENT forHTTPHeaderField:@"Content-Type"];
         NSURLSession *session = [NSURLSession sharedSession];
         NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:req completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
             NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
             NSLog(@"%@", json);
             if( [response isKindOfClass:[NSHTTPURLResponse class]]){
-                resp = (NSHTTPURLResponse*) response;
+                resp = [NSDictionary dictionaryWithObjectsAndKeys:json,@"json",httpResponse,@"response",nil];
             }
         }];
         [dataTask resume];
@@ -37,7 +45,8 @@ static NSHTTPURLResponse *resp;
     return resp;
 }
 
-+ (NSHTTPURLResponse *) sendRequest:(NSString *) URL:(NSString *) REQ_TYPE:(NSData *) DATA{
+
+- (NSMutableDictionary *) sendRequest:(NSString *)url REQ_TYPE:(NSString *)reqType  DATA:(NSData *) data ACCESS_TOKEN:(NSString*)access{
     
     return resp;
 }

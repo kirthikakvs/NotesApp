@@ -11,6 +11,7 @@
 #define TOKEN @"ACCESS_TOKEN"
 #define API_KEY @"X-Api-Key"
 #define URL_CONTENT @"application/json"
+#define GET @"GET"
 @interface NotesConstants : NSObject
 {
     

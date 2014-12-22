@@ -11,9 +11,9 @@
 
 @interface NetworkCalls : NSObject
 
++ (NetworkCalls *)sharedNetworkCall;
 
-
-+ (NSHTTPURLResponse *) sendRequestWithoutData:(NSString *)url REQ_TYPE:(NSString*)req ACCESS_TOKEN:(NSString*)access;
-+ (NSHTTPURLResponse *) sendRequest:(NSString *)url REQ_TYPE:(NSString *)req  DATA:(NSData *) data ACCESS_TOKEN:(NSString*)access;
+- (NSMutableDictionary *) sendRequestWithoutData:(NSString *)url REQ_TYPE:(NSString*)reqType ACCESS_TOKEN:(NSString*)access;
+- (NSMutableDictionary *) sendRequest:(NSString *)url REQ_TYPE:(NSString *)reqType  DATA:(NSData *) data ACCESS_TOKEN:(NSString*)access;
 
 @end
