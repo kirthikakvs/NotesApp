@@ -8,16 +8,24 @@
 
 #import <UIKit/UIKit.h>
 #import "NetworkCalls.h"
+#import "Reachability.h"
+#define appDelegate ((AppDelegate*)[UIApplication sharedApplication].delegate)
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,UIAlertViewDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong,nonatomic) UIStoryboard *storyboard;
+@property (nonatomic) Reachability *reachability;
+@property (nonatomic) BOOL monitoringReachability;
+@property (nonatomic, strong) UIImageView *splashView;
 
+-(void) checkReachability;
+- (void) getFromKeychain;
 - (void) signIn;
 - (void) alreadySignedIn;
 - (void) mobihelpConfig;
 - (void) parseData;
 - (void) processResponse;
+
 @end
 

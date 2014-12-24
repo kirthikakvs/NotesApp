@@ -8,9 +8,10 @@
 
 #import "NetworkCalls.h"
 #import "NotesConstants.h"
+#import "userAlertView.h"
 
 static NetworkCalls *sharedNetworkCall = nil;
-static NSMutableDictionary *resp;
+
 
 @implementation NetworkCalls
 
@@ -22,33 +23,111 @@ static NSMutableDictionary *resp;
     	    return sharedNetworkCall;
     	}
 
-- (NSMutableDictionary *) sendRequestWithoutData:(NSString *)url REQ_TYPE:(NSString*)reqType ACCESS_TOKEN:(NSString*)access
-{
-    dispatch_async(dispatch_get_main_queue(),^{
-        NSURL *u = [NSURL URLWithString:url ];
-        NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:u];
-        [req setHTTPMethod:reqType];
-        [req setValue:access forHTTPHeaderField:API_KEY];
-        [req setValue:URL_CONTENT forHTTPHeaderField:@"Accept"];
-        [req setValue:URL_CONTENT forHTTPHeaderField:@"Content-Type"];
-        NSURLSession *session = [NSURLSession sharedSession];
-        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:req completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
-            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-            NSLog(@"%@", json);
-            if( [response isKindOfClass:[NSHTTPURLResponse class]]){
-                resp = [NSDictionary dictionaryWithObjectsAndKeys:json,@"json",httpResponse,@"response",nil];
+- (void) sendRequestWithoutData:(NSString *)url REQ_TYPE:(NSString*)reqType ACCESS_TOKEN:(NSString*)access
+                                      completion:(void(^)(NSDictionary *responseObject, NSError *error))completion{
+    dispatch_async(dispatch_get_main_queue(), ^{
+    __block NSDictionary *resp;
+        NSLog(@"string for URL => %@",url);
+    NSURL *u = [NSURL URLWithString:url];
+        NSLog(@"URL => %@",[u description]);
+    NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:u];
+    [req setHTTPMethod:reqType];
+    [req setValue:access forHTTPHeaderField:API_KEY];
+    [req setValue:URL_CONTENT forHTTPHeaderField:@"Accept"];
+    //[req setValue:URL_CONTENT forHTTPHeaderField:@"Content-Type"];
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:req completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+        if(error)
+        {
+            completion(nil,error);
+        }
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"%@", json);
+        if( [response isKindOfClass:[NSHTTPURLResponse class]]){
+            resp = [NSDictionary dictionaryWithObjectsAndKeys:json,@"json",httpResponse,@"response",nil];
+            if(!resp)
+            {
+                resp=nil;
             }
-        }];
-        [dataTask resume];
+            completion(resp, nil);
+        }
+    }];
+    [dataTask resume];
     });
-    return resp;
 }
 
 
-- (NSMutableDictionary *) sendRequest:(NSString *)url REQ_TYPE:(NSString *)reqType  DATA:(NSData *) data ACCESS_TOKEN:(NSString*)access{
-    
-    return resp;
+- (void) sendRequest:(NSString *)url REQ_TYPE:(NSString *)reqType  DATA:(NSString *)data ACCESS_TOKEN:(NSString*)access completion:(void(^)(NSDictionary *responseObject, NSError *error))completion{
+    __block NSDictionary *resp;
+    NSURL *u = [NSURL URLWithString:url ];
+    NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:u];
+    [req setHTTPMethod:reqType];
+    [req setValue:access forHTTPHeaderField:API_KEY];
+    [req setValue:URL_CONTENT forHTTPHeaderField:@"Accept"];
+    [req setValue:URL_CONTENT forHTTPHeaderField:@"Content-Type"];
+    NSString *stringData = [NSString stringWithFormat:data];
+    NSLog(@"HTTP BODY => %@",stringData);
+    [req setHTTPBody:[stringData dataUsingEncoding:NSUTF8StringEncoding]];
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:req completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"%@", json);
+        if( [response isKindOfClass:[NSHTTPURLResponse class]]){
+            resp = [NSDictionary dictionaryWithObjectsAndKeys:json,@"json",httpResponse,@"response",nil];
+            completion(resp, nil);
+        }
+    }];
+    [dataTask resume];
 }
+
+- (void) sendRequestWithoutAccessToken:(NSString *)url REQ_TYPE:(NSString*)reqType
+                            completion:(void(^)(NSDictionary *responseObject, NSError *error))completion
+{
+    __block NSDictionary *resp;
+    NSURL *u = [NSURL URLWithString:url ];
+    NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:u];
+    [req setHTTPMethod:reqType];
+    [req setValue:URL_CONTENT forHTTPHeaderField:@"Accept"];
+    [req setValue:URL_CONTENT forHTTPHeaderField:@"Content-Type"];
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:req completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"%@", json);
+        if( [response isKindOfClass:[NSHTTPURLResponse class]]){
+            resp = [NSDictionary dictionaryWithObjectsAndKeys:json,@"json",httpResponse,@"response",nil];
+            completion(resp, nil);
+        }
+    }];
+    [dataTask resume];
+}
+
+- (void) sendRequestWithData:(NSString *)url REQ_TYPE:(NSString *)reqType  DATA:(NSString *) data completion:(void(^)(NSDictionary *responseObject, NSError *error))completion
+{
+    __block NSDictionary *resp;
+    NSURL *u = [NSURL URLWithString:url ];
+    NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:u];
+    [req setHTTPMethod:reqType];
+    [req setValue:URL_CONTENT forHTTPHeaderField:@"Accept"];
+    [req setValue:URL_CONTENT forHTTPHeaderField:@"Content-Type"];
+    NSString *stringData = [NSString stringWithFormat:data];
+    NSLog(@"HTTP BODY => %@",stringData);
+    [req setHTTPBody:[stringData dataUsingEncoding:NSUTF8StringEncoding]];
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:req completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"%@", json);
+        if( [response isKindOfClass:[NSHTTPURLResponse class]]){
+            resp = [NSDictionary dictionaryWithObjectsAndKeys:json,@"json",httpResponse,@"response",nil];
+            completion(resp, nil);
+        }
+    }];
+    [dataTask resume];
+}
+
+
 
 @end

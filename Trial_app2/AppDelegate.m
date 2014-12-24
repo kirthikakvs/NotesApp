@@ -8,37 +8,66 @@
 
 #import "AppDelegate.h"
 #import <CoreData/CoreData.h>
-#import "XYZToDoListTableViewController.h"
+#import "NotesViewController.h"
 #import "UICKeyChainStore.h"
 #import "SignInViewController.h"
 #import "Mobihelp.h"
 #import "NotesConstants.h"
 #import "NetworkCalls.h"
+#import "userAlertView.h"
+
 
 @interface AppDelegate ()
 {
+    BOOL isConnected;
 NSString *user_id;
 NSString *access_token;
-NSMutableDictionary *json;
+NSDictionary *json;
 NSHTTPURLResponse *httpResponse;
-    NSMutableDictionary *resp;
+NSDictionary *resp;
 }
 @end
 
 @implementation AppDelegate
 
+@synthesize splashView;
+
 - (BOOL) application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
     return YES;
 }
 
+- (void) splashFade
+{
+    splashView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 320, 480)];
+    splashView.image = [UIImage imageNamed:@"Default.png"];
+    [_window addSubview:splashView];
+    [_window bringSubviewToFront:splashView];
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:2.0];
+    [UIView setAnimationDelay:2.5];
+    [UIView setAnimationTransition:UIViewAnimationTransitionNone forView:_window cache:YES];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(startupAnimationDone:finished:context:)];
+    splashView.alpha = 0.0;
+    [UIView commitAnimations];
+    //Create and add the Activity Indicator to splashView
+    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    activityIndicator.alpha = 1.0;
+    activityIndicator.center = CGPointMake(160, 360);
+    activityIndicator.hidesWhenStopped = NO;
+    [splashView addSubview:activityIndicator];
+    [activityIndicator startAnimating];
+}
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOption
 {   // Override point for customization after application launch.
+    
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     self.storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    [NSThread sleepForTimeInterval:5.0];
     [self mobihelpConfig];
-    UICKeyChainStore *store = [UICKeyChainStore keyChainStoreWithService:@"com.notes.app"];
-    user_id = [store stringForKey:@"USER_ID"];
-    access_token = [store stringForKey:@"ACCESS_TOKEN"];
+    [self getFromKeychain];
     if (user_id && access_token)
     {
         [self alreadySignedIn];
@@ -50,6 +79,13 @@ NSHTTPURLResponse *httpResponse;
     return YES;
 }
 
+- (void) getFromKeychain
+{
+    UICKeyChainStore *store = [UICKeyChainStore keyChainStoreWithService:@"com.notes.app"];
+    user_id = [store stringForKey:@"USER_ID"];
+    access_token = [store stringForKey:@"ACCESS_TOKEN"];
+}
+
 -(void) mobihelpConfig{
     MobihelpConfig *config = [[MobihelpConfig alloc]initWithDomain:@"rexinc.freshdesk.com" withAppKey:@"notesapp-2-2cc34b4abbc4644a11e678e95570c719" andAppSecret:@"7cbe1bf637c70519f9f96a29d0985be8a7285566"];
     config.launchCountForAppReviewPrompt = 10;
@@ -58,22 +94,32 @@ NSHTTPURLResponse *httpResponse;
     [[Mobihelp sharedInstance] leaveBreadcrumb:@"Notes App started"];
 }
 
-- (void) alreadySignedIn
-{
-        NSLog(@"Verifying Credentials");
-        NSString *str = [NSString stringWithFormat:GET_USER,user_id];
+- (void) alreadySignedIn{
+    dispatch_async(dispatch_get_main_queue(),^{
+    NSLog(@"Verifying Credentials");
+    NSString *str = [NSString stringWithFormat:GET_USER,user_id];
     NetworkCalls *call = [NetworkCalls sharedNetworkCall];
-    resp = [call sendRequestWithoutData:str REQ_TYPE:GET ACCESS_TOKEN:access_token];
-        NSLog(@"Network call should be completed. The Dictionary value returned : %@",resp);
-    [self processResponse];
+    [call sendRequestWithoutData:str REQ_TYPE:GET ACCESS_TOKEN:access_token completion:^(NSDictionary *response, NSError *error) {
+        if(!error)
+        {
+            resp = response;
+            [self processResponse];
+        }
+        else
+        {
+            UIViewController *signin = [self.storyboard instantiateViewControllerWithIdentifier:@"SignInNavigation"];
+            self.window.rootViewController = signin;
+            [self.window makeKeyAndVisible];
+        }
+    }];
+    });
 }
 
 - (void) processResponse
-{
+{   
     json = [resp valueForKey:@"json"];
     NSLog(@" after network call JSON response => %@",json);
     httpResponse = [resp valueForKey:@"response"];
-    
     if ([httpResponse statusCode] == 200)
     {
         [self parseData];
@@ -83,6 +129,7 @@ NSHTTPURLResponse *httpResponse;
         UIViewController *signin = [self.storyboard instantiateViewControllerWithIdentifier:@"SignInNavigation"];
         self.window.rootViewController = signin;
         [self.window makeKeyAndVisible];
+        
     }
 }
 
@@ -112,5 +159,15 @@ NSHTTPURLResponse *httpResponse;
     self.window.rootViewController = signin;
     [self.window makeKeyAndVisible];
 }
+
+
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"Inside clicked at button");
+}
+
+
+
 
 @end

@@ -14,12 +14,14 @@
 		CE539E211A23016700D1FAEB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE539E201A23016700D1FAEB /* Images.xcassets */; };
 		CE539E241A23016700D1FAEB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE539E221A23016700D1FAEB /* LaunchScreen.xib */; };
 		CE539E301A23016700D1FAEB /* Trial_app2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE539E2F1A23016700D1FAEB /* Trial_app2Tests.m */; };
-		CE539E3B1A2332E000D1FAEB /* XYZAddToDoItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE539E3A1A2332E000D1FAEB /* XYZAddToDoItemViewController.m */; };
-		CE539E3E1A2335B800D1FAEB /* XYZToDoListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE539E3D1A2335B800D1FAEB /* XYZToDoListTableViewController.m */; };
-		CE539E411A234E6400D1FAEB /* XYZToDoList.m in Sources */ = {isa = PBXBuildFile; fileRef = CE539E401A234E6400D1FAEB /* XYZToDoList.m */; };
+		CE539E3B1A2332E000D1FAEB /* toDoItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE539E3A1A2332E000D1FAEB /* toDoItemViewController.m */; };
+		CE539E3E1A2335B800D1FAEB /* NotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE539E3D1A2335B800D1FAEB /* NotesViewController.m */; };
+		CE539E411A234E6400D1FAEB /* toDoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CE539E401A234E6400D1FAEB /* toDoItem.m */; };
 		CE539E441A2465A000D1FAEB /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE539E421A2465A000D1FAEB /* Model.xcdatamodeld */; };
 		CE5A0A0F1A30607200BC72E7 /* userAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5A0A0E1A30607200BC72E7 /* userAlertView.m */; };
 		CE5A0A121A30611600BC72E7 /* UserAlertWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5A0A111A30611600BC72E7 /* UserAlertWrapper.m */; };
+		CE5B9A431A4826CE0099F219 /* UIView+ParallaxEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5B9A421A4826CE0099F219 /* UIView+ParallaxEffect.m */; };
+		CE5B9A4A1A494C750099F219 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5B9A491A494C750099F219 /* Reachability.m */; };
 		CE6B6D881A3589A80045C409 /* 1916561.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE6B6D871A3589A70045C409 /* 1916561.jpg */; };
 		CE6B6DCD1A35B1650045C409 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE6B6DCB1A35B1650045C409 /* Main.storyboard */; };
 		CE6B6DD61A36F3D60045C409 /* UICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6B6DD51A36F3D60045C409 /* UICKeyChainStore.m */; };
@@ -98,17 +100,21 @@
 		CE539E291A23016700D1FAEB /* Trial_app2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Trial_app2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE539E2E1A23016700D1FAEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE539E2F1A23016700D1FAEB /* Trial_app2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Trial_app2Tests.m; sourceTree = "<group>"; };
-		CE539E391A2332E000D1FAEB /* XYZAddToDoItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZAddToDoItemViewController.h; sourceTree = "<group>"; };
-		CE539E3A1A2332E000D1FAEB /* XYZAddToDoItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZAddToDoItemViewController.m; sourceTree = "<group>"; };
-		CE539E3C1A2335B800D1FAEB /* XYZToDoListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZToDoListTableViewController.h; sourceTree = "<group>"; };
-		CE539E3D1A2335B800D1FAEB /* XYZToDoListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZToDoListTableViewController.m; sourceTree = "<group>"; };
-		CE539E3F1A234E6400D1FAEB /* XYZToDoList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZToDoList.h; sourceTree = "<group>"; };
-		CE539E401A234E6400D1FAEB /* XYZToDoList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZToDoList.m; sourceTree = "<group>"; };
+		CE539E391A2332E000D1FAEB /* toDoItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = toDoItemViewController.h; sourceTree = "<group>"; };
+		CE539E3A1A2332E000D1FAEB /* toDoItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = toDoItemViewController.m; sourceTree = "<group>"; };
+		CE539E3C1A2335B800D1FAEB /* NotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesViewController.h; sourceTree = "<group>"; };
+		CE539E3D1A2335B800D1FAEB /* NotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesViewController.m; sourceTree = "<group>"; };
+		CE539E3F1A234E6400D1FAEB /* toDoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = toDoItem.h; sourceTree = "<group>"; };
+		CE539E401A234E6400D1FAEB /* toDoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = toDoItem.m; sourceTree = "<group>"; };
 		CE539E431A2465A000D1FAEB /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		CE5A0A0D1A30607200BC72E7 /* userAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = userAlertView.h; sourceTree = "<group>"; };
 		CE5A0A0E1A30607200BC72E7 /* userAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = userAlertView.m; sourceTree = "<group>"; };
 		CE5A0A101A30611600BC72E7 /* UserAlertWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAlertWrapper.h; sourceTree = "<group>"; };
 		CE5A0A111A30611600BC72E7 /* UserAlertWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAlertWrapper.m; sourceTree = "<group>"; };
+		CE5B9A411A4826CE0099F219 /* UIView+ParallaxEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ParallaxEffect.h"; sourceTree = "<group>"; };
+		CE5B9A421A4826CE0099F219 /* UIView+ParallaxEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ParallaxEffect.m"; sourceTree = "<group>"; };
+		CE5B9A481A494C750099F219 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		CE5B9A491A494C750099F219 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		CE6B6D871A3589A70045C409 /* 1916561.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1916561.jpg; sourceTree = "<group>"; };
 		CE6B6DCC1A35B1650045C409 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Trial_app2/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CE6B6DD41A36F3D60045C409 /* UICKeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICKeyChainStore.h; sourceTree = "<group>"; };
@@ -261,6 +267,101 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		CE5B9A321A480D190099F219 /* Mobihelp */ = {
+			isa = PBXGroup;
+			children = (
+				CEC4DE7F1A42C1AE005C2B79 /* MobihelpResources */,
+				CEC4DE7C1A42C1AE005C2B79 /* libFDMobihelpSDK.a */,
+				CEC4DE7D1A42C1AE005C2B79 /* MHModel.bundle */,
+				CEC4DE7E1A42C1AE005C2B79 /* Mobihelp.h */,
+			);
+			name = Mobihelp;
+			sourceTree = "<group>";
+		};
+		CE5B9A331A480D2B0099F219 /* Keychainstore */ = {
+			isa = PBXGroup;
+			children = (
+				CE6B6DD41A36F3D60045C409 /* UICKeyChainStore.h */,
+				CE6B6DD51A36F3D60045C409 /* UICKeyChainStore.m */,
+			);
+			name = Keychainstore;
+			sourceTree = "<group>";
+		};
+		CE5B9A341A480D390099F219 /* NSDate Category */ = {
+			isa = PBXGroup;
+			children = (
+				CEC4DE771A4149B8005C2B79 /* NSDate+NVTimeAgo.h */,
+				CEC4DE781A4149B8005C2B79 /* NSDate+NVTimeAgo.m */,
+			);
+			name = "NSDate Category";
+			sourceTree = "<group>";
+		};
+		CE5B9A351A480D4F0099F219 /* Signin */ = {
+			isa = PBXGroup;
+			children = (
+				CEE304631A2DD113001F0196 /* SignInViewController.h */,
+				CEE304641A2DD113001F0196 /* SignInViewController.m */,
+			);
+			name = Signin;
+			sourceTree = "<group>";
+		};
+		CE5B9A361A480D590099F219 /* Signup */ = {
+			isa = PBXGroup;
+			children = (
+				CEE304661A2DD129001F0196 /* SignUpViewController.h */,
+				CEE304671A2DD129001F0196 /* SignUpViewController.m */,
+			);
+			name = Signup;
+			sourceTree = "<group>";
+		};
+		CE5B9A371A4817140099F219 /* Notes */ = {
+			isa = PBXGroup;
+			children = (
+				CE539E3C1A2335B800D1FAEB /* NotesViewController.h */,
+				CE539E3D1A2335B800D1FAEB /* NotesViewController.m */,
+			);
+			name = Notes;
+			sourceTree = "<group>";
+		};
+		CE5B9A381A48180C0099F219 /* toDoItem */ = {
+			isa = PBXGroup;
+			children = (
+				CE539E391A2332E000D1FAEB /* toDoItemViewController.h */,
+				CE539E3A1A2332E000D1FAEB /* toDoItemViewController.m */,
+			);
+			name = toDoItem;
+			sourceTree = "<group>";
+		};
+		CE5B9A391A48188F0099F219 /* userAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				CE5A0A0D1A30607200BC72E7 /* userAlertView.h */,
+				CE5A0A0E1A30607200BC72E7 /* userAlertView.m */,
+				CE5A0A101A30611600BC72E7 /* UserAlertWrapper.h */,
+				CE5A0A111A30611600BC72E7 /* UserAlertWrapper.m */,
+			);
+			name = userAlertView;
+			sourceTree = "<group>";
+		};
+		CE5B9A3A1A4818A90099F219 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				CE1297B01A2633C0006E5046 /* SimpleTableCell.xib */,
+				CE1297B21A263845006E5046 /* SimpleTableCell.h */,
+				CE1297B31A263845006E5046 /* SimpleTableCell.m */,
+			);
+			name = TableViewCell;
+			sourceTree = "<group>";
+		};
+		CE5B9A471A494B670099F219 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				CE5B9A481A494C750099F219 /* Reachability.h */,
+				CE5B9A491A494C750099F219 /* Reachability.m */,
+			);
+			name = Reachability;
+			sourceTree = "<group>";
+		};
 		CEC4DE7F1A42C1AE005C2B79 /* MobihelpResources */ = {
 			isa = PBXGroup;
 			children = (
@@ -358,14 +459,9 @@
 			children = (
 				CE539E201A23016700D1FAEB /* Images.xcassets */,
 				CE539E221A23016700D1FAEB /* LaunchScreen.xib */,
-				CE1297B01A2633C0006E5046 /* SimpleTableCell.xib */,
-				CE1297B21A263845006E5046 /* SimpleTableCell.h */,
-				CE1297B31A263845006E5046 /* SimpleTableCell.m */,
-				CE5A0A0D1A30607200BC72E7 /* userAlertView.h */,
+				CE5B9A3A1A4818A90099F219 /* TableViewCell */,
+				CE5B9A391A48188F0099F219 /* userAlertView */,
 				CE6B6DCB1A35B1650045C409 /* Main.storyboard */,
-				CE5A0A0E1A30607200BC72E7 /* userAlertView.m */,
-				CE5A0A101A30611600BC72E7 /* UserAlertWrapper.h */,
-				CE5A0A111A30611600BC72E7 /* UserAlertWrapper.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -373,14 +469,10 @@
 		CEC4DEEB1A4413C2005C2B79 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				CEE304631A2DD113001F0196 /* SignInViewController.h */,
-				CEE304641A2DD113001F0196 /* SignInViewController.m */,
-				CEE304661A2DD129001F0196 /* SignUpViewController.h */,
-				CEE304671A2DD129001F0196 /* SignUpViewController.m */,
-				CE539E3C1A2335B800D1FAEB /* XYZToDoListTableViewController.h */,
-				CE539E3D1A2335B800D1FAEB /* XYZToDoListTableViewController.m */,
-				CE539E391A2332E000D1FAEB /* XYZAddToDoItemViewController.h */,
-				CE539E3A1A2332E000D1FAEB /* XYZAddToDoItemViewController.m */,
+				CE5B9A351A480D4F0099F219 /* Signin */,
+				CE5B9A361A480D590099F219 /* Signup */,
+				CE5B9A371A4817140099F219 /* Notes */,
+				CE5B9A381A48180C0099F219 /* toDoItem */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -389,8 +481,8 @@
 			isa = PBXGroup;
 			children = (
 				CE539E421A2465A000D1FAEB /* Model.xcdatamodeld */,
-				CE539E3F1A234E6400D1FAEB /* XYZToDoList.h */,
-				CE539E401A234E6400D1FAEB /* XYZToDoList.m */,
+				CE539E3F1A234E6400D1FAEB /* toDoItem.h */,
+				CE539E401A234E6400D1FAEB /* toDoItem.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -398,14 +490,10 @@
 		CEC4DEED1A441466005C2B79 /* Third-Party Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				CEC4DE7F1A42C1AE005C2B79 /* MobihelpResources */,
-				CEC4DE7C1A42C1AE005C2B79 /* libFDMobihelpSDK.a */,
-				CEC4DE7D1A42C1AE005C2B79 /* MHModel.bundle */,
-				CEC4DE7E1A42C1AE005C2B79 /* Mobihelp.h */,
-				CE6B6DD41A36F3D60045C409 /* UICKeyChainStore.h */,
-				CE6B6DD51A36F3D60045C409 /* UICKeyChainStore.m */,
-				CEC4DE771A4149B8005C2B79 /* NSDate+NVTimeAgo.h */,
-				CEC4DE781A4149B8005C2B79 /* NSDate+NVTimeAgo.m */,
+				CE5B9A471A494B670099F219 /* Reachability */,
+				CE5B9A321A480D190099F219 /* Mobihelp */,
+				CE5B9A331A480D2B0099F219 /* Keychainstore */,
+				CE5B9A341A480D390099F219 /* NSDate Category */,
 			);
 			name = "Third-Party Libraries";
 			sourceTree = "<group>";
@@ -417,6 +505,8 @@
 				CEC4DEF01A44334E005C2B79 /* NotesConstants.m */,
 				CEC4DEF21A4437F9005C2B79 /* NetworkCalls.h */,
 				CEC4DEF31A4437F9005C2B79 /* NetworkCalls.m */,
+				CE5B9A411A4826CE0099F219 /* UIView+ParallaxEffect.h */,
+				CE5B9A421A4826CE0099F219 /* UIView+ParallaxEffect.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -558,20 +648,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE5A0A0F1A30607200BC72E7 /* userAlertView.m in Sources */,
+				CE5B9A431A4826CE0099F219 /* UIView+ParallaxEffect.m in Sources */,
 				CEC4DEF11A44334E005C2B79 /* NotesConstants.m in Sources */,
 				CEE304651A2DD113001F0196 /* SignInViewController.m in Sources */,
-				CE539E3B1A2332E000D1FAEB /* XYZAddToDoItemViewController.m in Sources */,
+				CE539E3B1A2332E000D1FAEB /* toDoItemViewController.m in Sources */,
 				CE1297B41A263845006E5046 /* SimpleTableCell.m in Sources */,
-				CE539E3E1A2335B800D1FAEB /* XYZToDoListTableViewController.m in Sources */,
+				CE539E3E1A2335B800D1FAEB /* NotesViewController.m in Sources */,
 				CE539E441A2465A000D1FAEB /* Model.xcdatamodeld in Sources */,
 				CEC4DEF41A4437F9005C2B79 /* NetworkCalls.m in Sources */,
 				CEC4DE791A4149B8005C2B79 /* NSDate+NVTimeAgo.m in Sources */,
 				CE6B6DD61A36F3D60045C409 /* UICKeyChainStore.m in Sources */,
-				CE539E411A234E6400D1FAEB /* XYZToDoList.m in Sources */,
+				CE539E411A234E6400D1FAEB /* toDoItem.m in Sources */,
 				CE539E191A23016600D1FAEB /* AppDelegate.m in Sources */,
 				CE539E161A23016600D1FAEB /* main.m in Sources */,
 				CE5A0A121A30611600BC72E7 /* UserAlertWrapper.m in Sources */,
 				CEE304681A2DD129001F0196 /* SignUpViewController.m in Sources */,
+				CE5B9A4A1A494C750099F219 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

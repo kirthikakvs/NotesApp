@@ -9,7 +9,7 @@
         <!--Add To-do Item-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="XYZAddToDoItemViewController" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="toDoItemViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -77,7 +77,7 @@
         <!--To-do List-->
         <scene sceneID="bze-NB-9Ke">
             <objects>
-                <tableViewController id="SBs-mc-3Km" customClass="XYZToDoListTableViewController" sceneMemberID="viewController">
+                <tableViewController id="SBs-mc-3Km" customClass="NotesViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="eti-ru-La7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -414,7 +414,7 @@
                                     <action selector="signInAction:" destination="h7k-xh-eWu" eventType="touchUpInside" id="bwc-Sa-J1h"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FqA-sj-c1X">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FqA-sj-c1X">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
@@ -467,6 +467,7 @@
                     <navigationItem key="navigationItem" id="XYE-jA-OzJ"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="SignIn" destination="ajI-eZ-hKg" id="nZi-Wc-vxK"/>
                         <outlet property="passwordText" destination="lwp-qK-l6h" id="poW-wq-zok"/>
                         <outlet property="userNameText" destination="EOX-oJ-ePg" id="iQM-uf-DJk"/>
                         <segue destination="hAu-bC-ssZ" kind="presentation" identifier="success_path" id="Pcw-La-iMm"/>
@@ -723,7 +724,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="edF-Bc-knd"/>
-        <segue reference="YSq-rL-qYh"/>
+        <segue reference="Pcw-La-iMm"/>
         <segue reference="R09-qj-mNb"/>
     </inferredMetricsTieBreakers>
 </document>

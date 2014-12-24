@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "userAlertView.h"
-#import "XYZToDoListTableViewController.h"
+#import "NotesViewController.h"
 #import "UICKeyChainStore.h"
 
 @interface SignUpViewController : UIViewController<UITextFieldDelegate,UIScrollViewDelegate>

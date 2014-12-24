@@ -12,6 +12,16 @@
 #define API_KEY @"X-Api-Key"
 #define URL_CONTENT @"application/json"
 #define GET @"GET"
+#define POST @"POST"
+#define PUT @"PUT"
+#define DELETE @"DELETE"
+#define DATE_FORMAT @"yyyy'-'MM'-'dd'T'HH':'mm':'ssZ"
+#define CONTENT @"content"
+#define STATUS @"status"
+#define CREATED @"created_at"
+#define UPDATED @"updated_at"
+#define REFRESH_FORMAT @"MMM d, h:mm a"
+
 @interface NotesConstants : NSObject
 {
     
@@ -26,5 +36,8 @@ extern NSString * CREATE_NOTE;
 extern NSString * UPDATE_NOTE;
 extern NSString * DEL_NOTE;
 extern NSString * GET_NOTES;
+extern NSString * USER_FORMAT;
+extern NSString * UPDATE_FORMAT;
+extern NSString * NOTE_FORMAT;
 
 @end

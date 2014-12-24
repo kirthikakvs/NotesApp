@@ -7,9 +7,16 @@
 //
 
 #import "SignUpViewController.h"
+#import "UIView+ParallaxEffect.h"
+#import "NetworkCalls.h"
+#import "NotesConstants.h"
 
 @interface SignUpViewController ()
-
+{
+    NSDictionary *json;
+    NSHTTPURLResponse *httpResponse;
+    NSDictionary *resp;
+}
 @end
 
 @implementation SignUpViewController
@@ -23,35 +30,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NetworkCalls *call = [NetworkCalls sharedNetworkCall];
     [[Mobihelp sharedInstance] leaveBreadcrumb:@"Sign Up"];
-    UIImage *image = [UIImage imageNamed:@"0210.jpg"];
-    UIImageView *backgroundView = [[UIImageView alloc] initWithImage:image];
-    CGRect scaledImageRect = CGRectMake( backgroundView.frame.origin.x - 15.0 ,backgroundView.frame.origin.y - 15.0, backgroundView.image.size.width + 10.0 , backgroundView.image.size.width + 10.0);
-    backgroundView.frame = scaledImageRect;
-    backgroundView.contentMode = UIViewContentModeScaleAspectFit;
-    backgroundView.autoresizingMask =
-    ( UIViewAutoresizingFlexibleBottomMargin
-     | UIViewAutoresizingFlexibleHeight
-     | UIViewAutoresizingFlexibleLeftMargin
-     | UIViewAutoresizingFlexibleRightMargin
-     | UIViewAutoresizingFlexibleTopMargin
-     | UIViewAutoresizingFlexibleWidth );
-    [self.view addSubview:backgroundView];
-    scrollView.contentSize = CGSizeMake(320,750);
-    UIInterpolatingMotionEffect *verticalMotionEffect= [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
-    verticalMotionEffect.minimumRelativeValue = @(-30);
-    verticalMotionEffect.maximumRelativeValue = @(30);
-    UIInterpolatingMotionEffect *horizontalMotionEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
-    horizontalMotionEffect.minimumRelativeValue = @(-30);
-    horizontalMotionEffect.maximumRelativeValue =@(30);
-    UIMotionEffectGroup *effectGroup = [UIMotionEffectGroup new];
-    effectGroup.motionEffects = @[horizontalMotionEffect,verticalMotionEffect];
-    [backgroundView addMotionEffect:effectGroup];
-    self.passwordText.secureTextEntry = YES;
-    self.confirmPasswordText.secureTextEntry = YES;
+    [self.view setParallaxEffect:[UIImage imageNamed:@"0210.jpg"]];
+    [self initSetup];
     // Do any additional setup after loading the view.
 }
 
+-(void) initSetup
+{
+    self.passwordText.secureTextEntry = YES;
+    self.confirmPasswordText.secureTextEntry = YES;
+}
 
 - (IBAction)backgroundTap:(id)sender {
     [self.view endEditing:YES];
@@ -87,58 +77,62 @@
     NSString *email = self.emailText.text;
     NSString *pass = self.passwordText.text;
     NSString *confirm = self.confirmPasswordText.text;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *str = [NSString stringWithFormat:@"http://192.168.5.179:3000/signup.json"];
-        NSURL *u = [NSURL URLWithString:str ];
-        NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:u];
-        [req setHTTPMethod:@"POST"];
-        [req setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-        [req setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        NSString *stringData = [NSString stringWithFormat:@"{ \"user\":{ \"name\":\"%@\", \"email\":\"%@\", \"password\":\"%@\", \"password_confirmation\":\"%@\" }}",nam,email,pass,confirm];
-        NSLog(@"HTTP BODY => %@",stringData);
-        [req setHTTPBody:[stringData dataUsingEncoding:NSUTF8StringEncoding]];
-        NSURLSession *session = [NSURLSession sharedSession];
-        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:req completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-            NSLog(@"%@", json);
-            if( [response isKindOfClass:[NSHTTPURLResponse class]]  ){
-                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*) response;
-                if ( [httpResponse statusCode] == 400 )
-                {
-                    dispatch_sync(dispatch_get_main_queue(),
-                                  ^{
-                                      NSArray *errorMsg = [json valueForKey:@"error"];
-                                      NSString *err_msg = [errorMsg componentsJoinedByString:@"= "];
-                                      NSLog(@"ERROR_MESSAGE :%@", err_msg);
-                                      NSLog(@"ERROR_MESSAGE => %@",errorMsg);
-                                      userAlertView *alertView = [[userAlertView alloc] initWithTitle:@"Notes App" message:[NSString stringWithFormat:@"%@",err_msg] delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-                                      [alertView showWithCompletion:NULL];
-                                  });
-                }
-                else
-                {
-                    dispatch_queue_t backgroundQueue = dispatch_queue_create("com.mycompany.myqueue", 0);
-                    dispatch_async(backgroundQueue, ^{
-                        NSString *accessToken=[json valueForKey:@"access_token"];
-                        NSString *userID=[[json valueForKey:@"user_id"] description];
-                        NSLog(@"%@,%@ ",accessToken,userID);
-                        UICKeyChainStore *store = [UICKeyChainStore keyChainStoreWithService:@"com.notes.app"];
-                        store[@"ACCESS_TOKEN"] = accessToken;
-                        store[@"USER_ID"] = userID;
-                        [store synchronize];
-                        NSLog(@"from keychain : %@",[store stringForKey:@"ACCESS_TOKEN"]);
-                    });
-                    dispatch_sync(dispatch_get_main_queue(),
-                                  ^{
-                                      userAlertView *alertView = [[userAlertView alloc] initWithTitle:@"Notes App" message:@"You have successfully signed up." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-                                      [alertView showWithCompletion:NULL];
-                                      [self performSegueWithIdentifier:@"sign_up_completion" sender:self];
-                                  });
-                }
-            }
-        }];
-        [dataTask resume];
+    NSString *str = [NSString stringWithFormat:CREATE_USER];
+    NSString *stringData = [NSString stringWithFormat:@"{ \"user\":{ \"name\":\"%@\", \"email\":\"%@\", \"password\":\"%@\", \"password_confirmation\":\"%@\" }}",nam,email,pass,confirm];
+    NetworkCalls *call = [NetworkCalls sharedNetworkCall];
+    [call sendRequestWithData:str REQ_TYPE:POST DATA:stringData completion:^(NSDictionary *response, NSError *error) {
+        resp = response;
+        [self processResponse];
+    }];
+}
+
+- (void) processResponse
+{
+    json = [resp valueForKey:@"json"];
+    NSLog(@" after network call JSON response => %@",json);
+    httpResponse = [resp valueForKey:@"response"];
+    if ( [httpResponse statusCode] == 400 )
+    {
+        [self handleError];
+    }
+    else
+    {
+        [self parseData];
+    }
+}
+
+-(void) handleError
+{
+    dispatch_sync(dispatch_get_main_queue(),
+                  ^{
+                      NSArray *errorMsg = [json valueForKey:@"error"];
+                      NSString *err_msg = [errorMsg componentsJoinedByString:@"= "];
+                      NSLog(@"ERROR_MESSAGE :%@", err_msg);
+                      NSLog(@"ERROR_MESSAGE => %@",errorMsg);
+                      userAlertView *alertView = [[userAlertView alloc] initWithTitle:@"Notes App" message:[NSString stringWithFormat:@"%@",err_msg] delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                      [alertView showWithCompletion:NULL];
+                  });
+}
+
+-(void) parseData
+{
+    dispatch_queue_t backgroundQueue = dispatch_queue_create("com.mycompany.myqueue", 0);
+    dispatch_async(backgroundQueue, ^{
+        NSString *accessToken=[json valueForKey:@"access_token"];
+        NSString *userID=[[json valueForKey:@"user_id"] description];
+        NSLog(@"%@,%@ ",accessToken,userID);
+        UICKeyChainStore *store = [UICKeyChainStore keyChainStoreWithService:@"com.notes.app"];
+        store[@"ACCESS_TOKEN"] = accessToken;
+        store[@"USER_ID"] = userID;
+        [store synchronize];
+        NSLog(@"from keychain : %@",[store stringForKey:@"ACCESS_TOKEN"]);
     });
+    dispatch_sync(dispatch_get_main_queue(),
+                  ^{
+                      userAlertView *alertView = [[userAlertView alloc] initWithTitle:@"Notes App" message:@"You have successfully signed up." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                      [alertView showWithCompletion:NULL];
+                      [self performSegueWithIdentifier:@"sign_up_completion" sender:self];
+                  });
 }
 
 - (IBAction)backToSignIn:(id)sender {

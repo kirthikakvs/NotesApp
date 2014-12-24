@@ -1,14 +1,14 @@
 //
-//  XYZToDoList.m
+//  toDoItem.m
 //  Trial_app2
 //
 //  Created by kirthikas on 24/11/14.
 //  Copyright (c) 2014 kirthikas. All rights reserved.
 //
 
-#import "XYZToDoList.h"
+#import "toDoItem.h"
 
-@implementation XYZToDoList
+@implementation toDoItem
 
 @synthesize content;
 @synthesize created;

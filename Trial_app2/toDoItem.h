@@ -1,5 +1,5 @@
 //
-//  XYZToDoList.h
+//  toDoItem.h
 //  Trial_app2
 //
 //  Created by kirthikas on 24/11/14.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface XYZToDoList : NSObject
+@interface toDoItem : NSObject
 
 @property NSString *content;
 @property NSString *status;

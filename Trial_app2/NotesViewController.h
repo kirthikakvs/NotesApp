@@ -1,5 +1,5 @@
 //
-//  XYZToDoListTableViewController.h
+//  NotesViewController.h
 //  Trial_app2
 //
 //  Created by kirthikas on 24/11/14.
@@ -10,11 +10,11 @@
 #import "userAlertView.h"
 #import "UICKeyChainStore.h"
 #import "SimpleTableCell.h"
-#import "XYZToDoList.h"
+#import "toDoItem.h"
 #import "NSDate+NVTimeAgo.h"
 #import "Mobihelp.h"
 
-@interface XYZToDoListTableViewController : UITableViewController <SimpleTableCellDelegate>
+@interface NotesViewController : UITableViewController <SimpleTableCellDelegate>
 {
     NSTimer *tapTimer;
     int tappedRow, doubleTapRow;
@@ -29,8 +29,10 @@
 + (void) noteEdit;
 - (void) showSupport;
 
+@property (nonatomic,strong) NSNumber * isConnected;
+@property (nonatomic,strong) UIActivityIndicatorView *ac;
 @property (nonatomic,strong) NSNumber * tapCount;
-@property (nonatomic,strong) XYZToDoList *editItem;
+@property (nonatomic,strong) toDoItem *editItem;
 @property (nonatomic, strong) NSString *var2;
 @property (nonatomic,strong) NSIndexPath *path;
 //retain vs strong

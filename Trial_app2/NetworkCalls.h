@@ -7,13 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "Reachability.h"
 
 @interface NetworkCalls : NSObject
 
+
 + (NetworkCalls *)sharedNetworkCall;
 
-- (NSMutableDictionary *) sendRequestWithoutData:(NSString *)url REQ_TYPE:(NSString*)reqType ACCESS_TOKEN:(NSString*)access;
-- (NSMutableDictionary *) sendRequest:(NSString *)url REQ_TYPE:(NSString *)reqType  DATA:(NSData *) data ACCESS_TOKEN:(NSString*)access;
+
+- (void) sendRequestWithoutData:(NSString *)url REQ_TYPE:(NSString*)reqType ACCESS_TOKEN:(NSString*)access
+                                      completion:(void(^)(NSDictionary *responseObject, NSError *error))completion;
+
+- (void) sendRequest:(NSString *)url REQ_TYPE:(NSString *)reqType  DATA:(NSString *) data ACCESS_TOKEN:(NSString*)access completion:(void(^)(NSDictionary *responseObject, NSError *error))completion;
+
+- (void) sendRequestWithData:(NSString *)url REQ_TYPE:(NSString *)reqType  DATA:(NSString *) data completion:(void(^)(NSDictionary *responseObject, NSError *error))completion;
+
+- (void) sendRequestWithoutAccessToken:(NSString *)url REQ_TYPE:(NSString*)reqType 
+                     completion:(void(^)(NSDictionary *responseObject, NSError *error))completion;
+
 
 @end
