@@ -90,14 +90,14 @@
 		CE1297B01A2633C0006E5046 /* SimpleTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleTableCell.xib; sourceTree = "<group>"; };
 		CE1297B21A263845006E5046 /* SimpleTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleTableCell.h; sourceTree = "<group>"; };
 		CE1297B31A263845006E5046 /* SimpleTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTableCell.m; sourceTree = "<group>"; };
-		CE539E101A23016600D1FAEB /* Trial_app2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trial_app2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE539E101A23016600D1FAEB /* NotesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE539E141A23016600D1FAEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE539E151A23016600D1FAEB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CE539E171A23016600D1FAEB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CE539E181A23016600D1FAEB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		CE539E201A23016700D1FAEB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CE539E231A23016700D1FAEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		CE539E291A23016700D1FAEB /* Trial_app2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Trial_app2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE539E291A23016700D1FAEB /* NotesAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotesAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE539E2E1A23016700D1FAEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE539E2F1A23016700D1FAEB /* Trial_app2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Trial_app2Tests.m; sourceTree = "<group>"; };
 		CE539E391A2332E000D1FAEB /* toDoItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = toDoItemViewController.h; sourceTree = "<group>"; };
@@ -216,8 +216,8 @@
 		CE539E111A23016600D1FAEB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CE539E101A23016600D1FAEB /* Trial_app2.app */,
-				CE539E291A23016700D1FAEB /* Trial_app2Tests.xctest */,
+				CE539E101A23016600D1FAEB /* NotesApp.app */,
+				CE539E291A23016700D1FAEB /* NotesAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -514,9 +514,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CE539E0F1A23016600D1FAEB /* Trial_app2 */ = {
+		CE539E0F1A23016600D1FAEB /* NotesApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CE539E331A23016700D1FAEB /* Build configuration list for PBXNativeTarget "Trial_app2" */;
+			buildConfigurationList = CE539E331A23016700D1FAEB /* Build configuration list for PBXNativeTarget "NotesApp" */;
 			buildPhases = (
 				CE539E0C1A23016600D1FAEB /* Sources */,
 				CE539E0D1A23016600D1FAEB /* Frameworks */,
@@ -526,14 +526,14 @@
 			);
 			dependencies = (
 			);
-			name = Trial_app2;
+			name = NotesApp;
 			productName = Trial_app2;
-			productReference = CE539E101A23016600D1FAEB /* Trial_app2.app */;
+			productReference = CE539E101A23016600D1FAEB /* NotesApp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		CE539E281A23016700D1FAEB /* Trial_app2Tests */ = {
+		CE539E281A23016700D1FAEB /* NotesAppTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CE539E361A23016700D1FAEB /* Build configuration list for PBXNativeTarget "Trial_app2Tests" */;
+			buildConfigurationList = CE539E361A23016700D1FAEB /* Build configuration list for PBXNativeTarget "NotesAppTests" */;
 			buildPhases = (
 				CE539E251A23016700D1FAEB /* Sources */,
 				CE539E261A23016700D1FAEB /* Frameworks */,
@@ -544,9 +544,9 @@
 			dependencies = (
 				CE539E2B1A23016700D1FAEB /* PBXTargetDependency */,
 			);
-			name = Trial_app2Tests;
+			name = NotesAppTests;
 			productName = Trial_app2Tests;
-			productReference = CE539E291A23016700D1FAEB /* Trial_app2Tests.xctest */;
+			productReference = CE539E291A23016700D1FAEB /* NotesAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -568,7 +568,7 @@
 					};
 				};
 			};
-			buildConfigurationList = CE539E0B1A23016600D1FAEB /* Build configuration list for PBXProject "Trial_app2" */;
+			buildConfigurationList = CE539E0B1A23016600D1FAEB /* Build configuration list for PBXProject "NotesApp" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -581,8 +581,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CE539E0F1A23016600D1FAEB /* Trial_app2 */,
-				CE539E281A23016700D1FAEB /* Trial_app2Tests */,
+				CE539E0F1A23016600D1FAEB /* NotesApp */,
+				CE539E281A23016700D1FAEB /* NotesAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -680,7 +680,7 @@
 /* Begin PBXTargetDependency section */
 		CE539E2B1A23016700D1FAEB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = CE539E0F1A23016600D1FAEB /* Trial_app2 */;
+			target = CE539E0F1A23016600D1FAEB /* NotesApp */;
 			targetProxy = CE539E2A1A23016700D1FAEB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -800,7 +800,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Trial_app2",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = NotesApp;
 			};
 			name = Debug;
 		};
@@ -814,7 +814,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Trial_app2",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = NotesApp;
 			};
 			name = Release;
 		};
@@ -832,7 +832,7 @@
 				);
 				INFOPLIST_FILE = Trial_app2Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = NotesAppTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Trial_app2.app/Trial_app2";
 			};
 			name = Debug;
@@ -847,7 +847,7 @@
 				);
 				INFOPLIST_FILE = Trial_app2Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = NotesAppTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Trial_app2.app/Trial_app2";
 			};
 			name = Release;
@@ -855,7 +855,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CE539E0B1A23016600D1FAEB /* Build configuration list for PBXProject "Trial_app2" */ = {
+		CE539E0B1A23016600D1FAEB /* Build configuration list for PBXProject "NotesApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CE539E311A23016700D1FAEB /* Debug */,
@@ -864,7 +864,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CE539E331A23016700D1FAEB /* Build configuration list for PBXNativeTarget "Trial_app2" */ = {
+		CE539E331A23016700D1FAEB /* Build configuration list for PBXNativeTarget "NotesApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CE539E341A23016700D1FAEB /* Debug */,
@@ -873,7 +873,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CE539E361A23016700D1FAEB /* Build configuration list for PBXNativeTarget "Trial_app2Tests" */ = {
+		CE539E361A23016700D1FAEB /* Build configuration list for PBXNativeTarget "NotesAppTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CE539E371A23016700D1FAEB /* Debug */,

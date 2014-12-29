@@ -118,7 +118,7 @@
 
 - (void) reloadData
 {
-    self.toDoItems = nil;
+    [self.toDoItems removeAllObjects];
     self.toDoItems = [[NSMutableArray alloc]init];
     [self getFromKeyChain];
     NSString *str = [NSString stringWithFormat:GET_NOTES];
@@ -171,28 +171,57 @@
 -(void)setData
 {
     NSMutableArray *notesArray = json[@"notes"];
-    if ([notesArray isKindOfClass:[NSArray class]])
+    int total = [self.toDoItems count];
+    int i=0;
+    if (total != 0)
     {
-        for (NSDictionary *dict in notesArray)
+        if ([notesArray isKindOfClass:[NSArray class]])
         {
-            NSLog(@"Processing %@", dict);
-            toDoItem *item = [[toDoItem alloc]init];
-            item.content = [dict valueForKey:CONTENT];
-            item.status = [dict valueForKey:STATUS];
-            NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-            [formatter setDateFormat:DATE_FORMAT];
-            item.created = [formatter dateFromString:dict[CREATED]];
-            item.updated = [formatter dateFromString:dict[UPDATED]];
-            NSLog(@"%@",[[dict valueForKey:@"id"] class]);
-            item.note_id = [dict valueForKey:@"id"];
-            [self.toDoItems addObject:item];
+            for (NSDictionary *dict in notesArray)
+            {
+                if (i<total)
+                {
+                    NSLog(@"Processing %@", dict);
+                    toDoItem *item = [[toDoItem alloc]init];
+                    item.content = [dict valueForKey:CONTENT];
+                    item.status = [dict valueForKey:STATUS];
+                    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+                    [formatter setDateFormat:DATE_FORMAT];
+                    item.created = [formatter dateFromString:dict[CREATED]];
+                    item.updated = [formatter dateFromString:dict[UPDATED]];
+                    NSLog(@"%@",[[dict valueForKey:@"id"] class]);
+                    item.note_id = [dict valueForKey:@"id"];
+                    [self.toDoItems replaceObjectAtIndex:i withObject:item];
+                    i++;
+                }
+           }
         }
-            [self.ac stopAnimating];
-        [self.ac removeFromSuperview];
-            [self refreshData];
-        
     }
+    else
+    {
+        if ([notesArray isKindOfClass:[NSArray class]])
+        {
+            for (NSDictionary *dict in notesArray)
+            {
+                    NSLog(@"Processing %@", dict);
+                    toDoItem *item = [[toDoItem alloc]init];
+                    item.content = [dict valueForKey:CONTENT];
+                    item.status = [dict valueForKey:STATUS];
+                    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+                    [formatter setDateFormat:DATE_FORMAT];
+                    item.created = [formatter dateFromString:dict[CREATED]];
+                    item.updated = [formatter dateFromString:dict[UPDATED]];
+                    NSLog(@"%@",[[dict valueForKey:@"id"] class]);
+                    item.note_id = [dict valueForKey:@"id"];
+                    [self.toDoItems addObject:item];
+            }
+        }
+    }
+    [self.ac stopAnimating];
+    [self.ac removeFromSuperview];
+    [self refreshData];
 }
+
 
 
 
@@ -290,20 +319,19 @@
 }
 
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue{
-    toDoItemViewController *source = [segue sourceViewController];
+    //[self reloadData];
+    /*toDoItemViewController *source = [segue sourceViewController];
     toDoItem *item= source.toDotem;
-    [self.toDoItems removeAllObjects];
-    [self.tableView reloadData];
-    //if(item!=nil){
-    //    if([source.taps isEqualToNumber:[NSNumber numberWithInt:2]]){
-    //            [self.toDoItems replaceObjectAtIndex:tappedRow withObject:item];
-    //            [self.tableView reloadData];
-    //    }
-    //    else{
-    //            [self.toDoItems addObject:item];
-    //            [self.tableView reloadData];
-    //    }
-    //}
+    if(item!=nil){
+        if([source.taps isEqualToNumber:[NSNumber numberWithInt:2]]){
+                [self.toDoItems replaceObjectAtIndex:tappedRow withObject:item];
+                [self.tableView reloadData];
+        }
+        else{
+                [self.toDoItems addObject:item];
+                [self.tableView reloadData];
+        }
+    }*/
 }
 
 
