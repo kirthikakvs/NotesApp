@@ -13,6 +13,11 @@
 #import "NotesConstants.h"
 #import "NetworkCalls.h"
 #import "Reachability.h"
+#import "NSDate+NVTimeAgo.h"
+#import "Mobihelp.h"
+#import "userAlertView.h"
+#import "UICKeyChainStore.h"
+
 
 @interface NotesViewController ()
 {

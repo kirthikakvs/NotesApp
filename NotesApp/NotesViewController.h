@@ -7,12 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "userAlertView.h"
-#import "UICKeyChainStore.h"
-#import "SimpleTableCell.h"
 #import "toDoItem.h"
-#import "NSDate+NVTimeAgo.h"
-#import "Mobihelp.h"
+#import "SimpleTableCell.h"
+
 
 @interface NotesViewController : UITableViewController <SimpleTableCellDelegate>
 {

@@ -7,17 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreData/CoreData.h>
 #import "toDoItem.h"
 
 @interface toDoItemViewController : UIViewController
-
-{
-    NSManagedObjectContext *managedObjectContext;
-}
-
 @property (weak, nonatomic) IBOutlet UITextField *textField;
-
 @property (nonatomic,strong)toDoItem *toDotem;
 @property (nonatomic,strong) id send;
 @property (nonatomic,strong) toDoItem *editedItem;

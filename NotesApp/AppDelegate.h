@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "NetworkCalls.h"
 #import "Reachability.h"
-#define appDelegate ((AppDelegate*)[UIApplication sharedApplication].delegate)
+
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate,UIAlertViewDelegate>
 

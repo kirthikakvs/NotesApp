@@ -10,6 +10,10 @@
 #import "UIView+ParallaxEffect.h"
 #import "NetworkCalls.h"
 #import "NotesConstants.h"
+#import "NotesViewController.h"
+#import "UICKeyChainStore.h"
+#import "userAlertView.h"
+#import "Mobihelp.h"
 
 @interface SignUpViewController ()
 {

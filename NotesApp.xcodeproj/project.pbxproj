@@ -13,7 +13,7 @@
 		CE539E191A23016600D1FAEB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE539E181A23016600D1FAEB /* AppDelegate.m */; };
 		CE539E211A23016700D1FAEB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE539E201A23016700D1FAEB /* Images.xcassets */; };
 		CE539E241A23016700D1FAEB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE539E221A23016700D1FAEB /* LaunchScreen.xib */; };
-		CE539E301A23016700D1FAEB /* Trial_app2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE539E2F1A23016700D1FAEB /* Trial_app2Tests.m */; };
+		CE539E301A23016700D1FAEB /* NotesApp2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE539E2F1A23016700D1FAEB /* NotesApp2Tests.m */; };
 		CE539E3B1A2332E000D1FAEB /* toDoItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE539E3A1A2332E000D1FAEB /* toDoItemViewController.m */; };
 		CE539E3E1A2335B800D1FAEB /* NotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE539E3D1A2335B800D1FAEB /* NotesViewController.m */; };
 		CE539E411A234E6400D1FAEB /* toDoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CE539E401A234E6400D1FAEB /* toDoItem.m */; };
@@ -23,14 +23,12 @@
 		CE5B9A431A4826CE0099F219 /* UIView+ParallaxEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5B9A421A4826CE0099F219 /* UIView+ParallaxEffect.m */; };
 		CE5B9A4A1A494C750099F219 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5B9A491A494C750099F219 /* Reachability.m */; };
 		CE6B6D881A3589A80045C409 /* 1916561.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE6B6D871A3589A70045C409 /* 1916561.jpg */; };
-		CE6B6DCD1A35B1650045C409 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE6B6DCB1A35B1650045C409 /* Main.storyboard */; };
 		CE6B6DD61A36F3D60045C409 /* UICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6B6DD51A36F3D60045C409 /* UICKeyChainStore.m */; };
 		CE6B6DD81A36F4AF0045C409 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6B6DD71A36F4AF0045C409 /* Security.framework */; };
 		CE77310D1A2DBE4B00674026 /* Black-Background-Wood-black-wallpaper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE77310C1A2DBE4B00674026 /* Black-Background-Wood-black-wallpaper.jpg */; };
 		CE77310F1A2DBF6E00674026 /* color-theme-blue-green-white-keywords-decorative-backgrounds.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE77310E1A2DBF6E00674026 /* color-theme-blue-green-white-keywords-decorative-backgrounds.jpg */; };
 		CEC4DE731A3F05D5005C2B79 /* 0210.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CEC4DE721A3F05D5005C2B79 /* 0210.jpg */; };
 		CEC4DE791A4149B8005C2B79 /* NSDate+NVTimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC4DE781A4149B8005C2B79 /* NSDate+NVTimeAgo.m */; };
-		CEC4DEA31A42C1AF005C2B79 /* libFDMobihelpSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC4DE7C1A42C1AE005C2B79 /* libFDMobihelpSDK.a */; };
 		CEC4DEA41A42C1B0005C2B79 /* MHModel.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CEC4DE7D1A42C1AE005C2B79 /* MHModel.bundle */; };
 		CEC4DEA51A42C1B0005C2B79 /* AttachmentPinFDDarkTheme@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC4DE821A42C1AE005C2B79 /* AttachmentPinFDDarkTheme@2x.png */; };
 		CEC4DEA61A42C1B0005C2B79 /* AttachmentPinFDLightTheme@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC4DE831A42C1AE005C2B79 /* AttachmentPinFDLightTheme@2x.png */; };
@@ -71,6 +69,9 @@
 		CEC4DED11A42C271005C2B79 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC4DED01A42C271005C2B79 /* QuartzCore.framework */; };
 		CEC4DEF11A44334E005C2B79 /* NotesConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC4DEF01A44334E005C2B79 /* NotesConstants.m */; };
 		CEC4DEF41A4437F9005C2B79 /* NetworkCalls.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC4DEF31A4437F9005C2B79 /* NetworkCalls.m */; };
+		CECB88571A51863F00FF8B89 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECB88551A51863F00FF8B89 /* Main.storyboard */; };
+		CECB88581A51876500FF8B89 /* libFDMobihelpSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC4DE7C1A42C1AE005C2B79 /* libFDMobihelpSDK.a */; };
+		CECB885B1A5188C900FF8B89 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CECB88591A5188C900FF8B89 /* Info.plist */; };
 		CEE304651A2DD113001F0196 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE304641A2DD113001F0196 /* SignInViewController.m */; };
 		CEE304681A2DD129001F0196 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE304671A2DD129001F0196 /* SignUpViewController.m */; };
 /* End PBXBuildFile section */
@@ -98,8 +99,7 @@
 		CE539E201A23016700D1FAEB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CE539E231A23016700D1FAEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		CE539E291A23016700D1FAEB /* NotesAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotesAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE539E2E1A23016700D1FAEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CE539E2F1A23016700D1FAEB /* Trial_app2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Trial_app2Tests.m; sourceTree = "<group>"; };
+		CE539E2F1A23016700D1FAEB /* NotesApp2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotesApp2Tests.m; sourceTree = "<group>"; };
 		CE539E391A2332E000D1FAEB /* toDoItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = toDoItemViewController.h; sourceTree = "<group>"; };
 		CE539E3A1A2332E000D1FAEB /* toDoItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = toDoItemViewController.m; sourceTree = "<group>"; };
 		CE539E3C1A2335B800D1FAEB /* NotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesViewController.h; sourceTree = "<group>"; };
@@ -116,7 +116,6 @@
 		CE5B9A481A494C750099F219 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		CE5B9A491A494C750099F219 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		CE6B6D871A3589A70045C409 /* 1916561.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1916561.jpg; sourceTree = "<group>"; };
-		CE6B6DCC1A35B1650045C409 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Trial_app2/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CE6B6DD41A36F3D60045C409 /* UICKeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICKeyChainStore.h; sourceTree = "<group>"; };
 		CE6B6DD51A36F3D60045C409 /* UICKeyChainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICKeyChainStore.m; sourceTree = "<group>"; };
 		CE6B6DD71A36F4AF0045C409 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -169,6 +168,8 @@
 		CEC4DEF01A44334E005C2B79 /* NotesConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesConstants.m; sourceTree = "<group>"; };
 		CEC4DEF21A4437F9005C2B79 /* NetworkCalls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkCalls.h; sourceTree = "<group>"; };
 		CEC4DEF31A4437F9005C2B79 /* NetworkCalls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkCalls.m; sourceTree = "<group>"; };
+		CECB88561A51863F00FF8B89 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CECB88591A5188C900FF8B89 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = NotesAppTests/Info.plist; sourceTree = SOURCE_ROOT; };
 		CEE304631A2DD113001F0196 /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
 		CEE304641A2DD113001F0196 /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
 		CEE304661A2DD129001F0196 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
@@ -180,6 +181,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CECB88581A51876500FF8B89 /* libFDMobihelpSDK.a in Frameworks */,
 				CEC4DED11A42C271005C2B79 /* QuartzCore.framework in Frameworks */,
 				CEC4DECF1A42C266005C2B79 /* Foundation.framework in Frameworks */,
 				CEC4DECD1A42C25B005C2B79 /* UIKit.framework in Frameworks */,
@@ -188,7 +190,6 @@
 				CEC4DEC51A42C234005C2B79 /* CoreTelephony.framework in Frameworks */,
 				CEC4DEC91A42C248005C2B79 /* CoreData.framework in Frameworks */,
 				CEC4DEC31A42C228005C2B79 /* MobileCoreServices.framework in Frameworks */,
-				CEC4DEA31A42C1AF005C2B79 /* libFDMobihelpSDK.a in Frameworks */,
 				CE6B6DD81A36F4AF0045C409 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -206,8 +207,8 @@
 		CE539E071A23016600D1FAEB = {
 			isa = PBXGroup;
 			children = (
-				CE539E121A23016600D1FAEB /* Trial_app2 */,
-				CE539E2C1A23016700D1FAEB /* Trial_app2Tests */,
+				CE539E121A23016600D1FAEB /* NotesApp */,
+				CE539E2C1A23016700D1FAEB /* NotesAppTests */,
 				CEC4DEE91A440EAC005C2B79 /* Frameworks */,
 				CE539E111A23016600D1FAEB /* Products */,
 			);
@@ -222,7 +223,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		CE539E121A23016600D1FAEB /* Trial_app2 */ = {
+		CE539E121A23016600D1FAEB /* NotesApp */ = {
 			isa = PBXGroup;
 			children = (
 				CE539E171A23016600D1FAEB /* AppDelegate.h */,
@@ -234,7 +235,7 @@
 				CE539E131A23016600D1FAEB /* Supporting Files */,
 				CEC4DEEE1A443274005C2B79 /* Utilities */,
 			);
-			path = Trial_app2;
+			path = NotesApp;
 			sourceTree = "<group>";
 		};
 		CE539E131A23016600D1FAEB /* Supporting Files */ = {
@@ -250,19 +251,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		CE539E2C1A23016700D1FAEB /* Trial_app2Tests */ = {
+		CE539E2C1A23016700D1FAEB /* NotesAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				CE539E2F1A23016700D1FAEB /* Trial_app2Tests.m */,
+				CE539E2F1A23016700D1FAEB /* NotesApp2Tests.m */,
 				CE539E2D1A23016700D1FAEB /* Supporting Files */,
 			);
-			path = Trial_app2Tests;
+			path = NotesAppTests;
 			sourceTree = "<group>";
 		};
 		CE539E2D1A23016700D1FAEB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				CE539E2E1A23016700D1FAEB /* Info.plist */,
+				CECB88591A5188C900FF8B89 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -457,11 +458,11 @@
 		CEC4DEEA1A441380005C2B79 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CECB88551A51863F00FF8B89 /* Main.storyboard */,
 				CE539E201A23016700D1FAEB /* Images.xcassets */,
 				CE539E221A23016700D1FAEB /* LaunchScreen.xib */,
 				CE5B9A3A1A4818A90099F219 /* TableViewCell */,
 				CE5B9A391A48188F0099F219 /* userAlertView */,
-				CE6B6DCB1A35B1650045C409 /* Main.storyboard */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -597,7 +598,6 @@
 				CEC4DEB11A42C1B0005C2B79 /* TextViewOuterFDLightTheme@2x.png in Resources */,
 				CEC4DEC11A42C1B0005C2B79 /* FDLightTheme.plist in Resources */,
 				CEC4DEAE1A42C1B0005C2B79 /* TextViewInnerFDDarkTheme@2x.png in Resources */,
-				CE6B6DCD1A35B1650045C409 /* Main.storyboard in Resources */,
 				CEC4DEB01A42C1B0005C2B79 /* TextViewOuterFDDarkTheme@2x.png in Resources */,
 				CEC4DEA81A42C1B0005C2B79 /* FDError@2x.png in Resources */,
 				CE77310D1A2DBE4B00674026 /* Black-Background-Wood-black-wallpaper.jpg in Resources */,
@@ -610,6 +610,7 @@
 				CEC4DEB91A42C1B0005C2B79 /* RightBubbleFDDarkTheme@3x.png in Resources */,
 				CEC4DEA91A42C1B0005C2B79 /* FDSuccess@2x.png in Resources */,
 				CEC4DEAB1A42C1B0005C2B79 /* LeftBubbleFDLightTheme@2x.png in Resources */,
+				CECB88571A51863F00FF8B89 /* Main.storyboard in Resources */,
 				CEC4DEC01A42C1B0005C2B79 /* FDDarkTheme.plist in Resources */,
 				CEC4DE731A3F05D5005C2B79 /* 0210.jpg in Resources */,
 				CEC4DEA41A42C1B0005C2B79 /* MHModel.bundle in Resources */,
@@ -630,6 +631,7 @@
 				CEC4DEB81A42C1B0005C2B79 /* LeftBubbleFDLightTheme@3x.png in Resources */,
 				CEC4DEB31A42C1B0005C2B79 /* AttachmentPinFDLightTheme@3x.png in Resources */,
 				CEC4DEA51A42C1B0005C2B79 /* AttachmentPinFDDarkTheme@2x.png in Resources */,
+				CECB885B1A5188C900FF8B89 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -671,7 +673,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE539E301A23016700D1FAEB /* Trial_app2Tests.m in Sources */,
+				CE539E301A23016700D1FAEB /* NotesApp2Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -694,21 +696,20 @@
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
-		CE6B6DCB1A35B1650045C409 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CE6B6DCC1A35B1650045C409 /* Base */,
-			);
-			name = Main.storyboard;
-			path = ..;
-			sourceTree = "<group>";
-		};
 		CEC4DE9E1A42C1AF005C2B79 /* MHLocalizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				CEC4DE9F1A42C1AF005C2B79 /* en */,
 			);
 			name = MHLocalizable.strings;
+			sourceTree = "<group>";
+		};
+		CECB88551A51863F00FF8B89 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CECB88561A51863F00FF8B89 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -794,11 +795,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = Trial_app2/Info.plist;
+				INFOPLIST_FILE = NotesApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Trial_app2",
+					"$(PROJECT_DIR)/NotesApp",
 				);
 				PRODUCT_NAME = NotesApp;
 			};
@@ -808,11 +810,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = Trial_app2/Info.plist;
+				INFOPLIST_FILE = NotesApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Trial_app2",
+					"$(PROJECT_DIR)/NotesApp",
 				);
 				PRODUCT_NAME = NotesApp;
 			};
@@ -830,10 +833,10 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = Trial_app2Tests/Info.plist;
+				INFOPLIST_FILE = NotesAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = NotesAppTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Trial_app2.app/Trial_app2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NotesApp.app/NotesApp";
 			};
 			name = Debug;
 		};
@@ -845,10 +848,10 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = Trial_app2Tests/Info.plist;
+				INFOPLIST_FILE = NotesAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = NotesAppTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Trial_app2.app/Trial_app2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NotesApp.app/NotesApp";
 			};
 			name = Release;
 		};
